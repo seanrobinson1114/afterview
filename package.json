@@ -7,7 +7,7 @@
   "scripts": {
     "install-deps": "cp package.json public/js; cd public/js; npm install --production; rm package.json",
     "install-dev-deps": "npm install --only=dev",
-    "start-server": "nodemon server.js",
+    "start-server": "node_modules/nodemon/bin/nodemon.js server.js",
     "update-webdriver": "node_modules/protractor/node_modules/webdriver-manager/bin/webdriver-manager update",
     "e2e-tests": "node_modules/protractor/bin/protractor protractor.conf.js",
     "unit-tests": "node_modules/karma/bin/karma start"
@@ -15,7 +15,7 @@
   "author": "robinson",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^1.12.1",
+    "nodemon": "latest",
     "http-server": "^0.10.0",
     "protractor": "latest",
     "java": "latest",

@@ -74,7 +74,7 @@ angular.module( 'AfterView.TripService', [] )
 
         else
           return 0;
-      },
+      }
     );
   };
 

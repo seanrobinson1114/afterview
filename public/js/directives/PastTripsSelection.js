@@ -49,7 +49,7 @@ angular.module( 'AfterView.PastTripsSelection', [] )
             PastTripsMap.initMap();
             PastTripsMap.showTripMarkers( that.display_trips );
           }
-        },
+        }
       );
 
       // Get all trip names

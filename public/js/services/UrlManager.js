@@ -10,16 +10,16 @@ angular.module( 'AfterView.UrlManager', [] )
 .factory( 'UrlManager', [function()
 {
   // Data
-  let trips_url = 'http://localhost:3000/trips',
-      trip_names_url = 'http://localhost:3000/trips/getAllTripNames/',
-      trip_types_url = 'http://localhost:3000/trips/getUniqueTypes/',
-      trip_states_url = 'http://localhost:3000/trips/getUniqueStates/',
-      trip_countries_url = 'http://localhost:3000/trips/getUniqueCountries/',
-      trips_images_url = 'http://localhost:3000/trips/getImagesForTrip/',
-      scheduled_trips_url = 'http://localhost:3000/schdtrips',
-      scheduled_trip_duration_url = 'http://localhost:3000/schdtrips/getDuration/',
-      scheduled_trip_people_url = 'http://localhost:3000/schdtrips/getPeople/',
-      image_base_url = 'http://localhost:3000/images/';
+  let trips_url = location.protocol + '//' + location.host + '/trips',
+      trip_names_url = location.protocol + '//' + location.host + '/trips/getAllTripNames/',
+      trip_types_url = location.protocol + '//' + location.host + '/trips/getUniqueTypes/',
+      trip_states_url = location.protocol + '//' + location.host + '/trips/getUniqueStates/',
+      trip_countries_url = location.protocol + '//' + location.host + '/trips/getUniqueCountries/',
+      trips_images_url = location.protocol + '//' + location.host + '/trips/getImagesForTrip/',
+      scheduled_trips_url = location.protocol + '//' + location.host + '/schdtrips',
+      scheduled_trip_duration_url = location.protocol + '//' + location.host + '/schdtrips/getDuration/',
+      scheduled_trip_people_url = location.protocol + '//' + location.host + '/schdtrips/getPeople/',
+      image_base_url = location.protocol + '//' + location.host + '/images/';
 
   // Map everything to same name for testing purposes
   return {
