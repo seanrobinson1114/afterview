@@ -1,0 +1,277 @@
+/*
+ * custom styles
+ * author@ robinson
+*/
+
+/* types */
+html {
+  background-color: gainsboro;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  position: absolute;
+  top: 80px;
+  background-color: black;
+  width: 100%;
+}
+
+nav {
+  margin-bottom: 0px !important;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background-color: darkslategrey;
+  width: 100vw;
+  height: 80px;
+}
+
+footer {
+  width: 100vw;
+  height: 200px;
+  background-color: darkslategrey;
+}
+
+/* classes */
+.img-gallery {
+  background-color: gainsboro;
+}
+
+.carousel-right-btn {
+  /*position: absolute;*/
+  width: 50px;
+  height: 50px;
+  right: 0px;
+}
+
+.modal-dialog {
+  position: fixed;
+  /*top: 2%;*/
+  left: 15%;
+}
+
+.image-wrapper {
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.image-carousel {
+  width: calc( 95vh * 1.5 );
+  height: 95vh;
+}
+
+.title {
+  position: absolute;
+  width: 100%;
+  left: 20%;
+  font-size: 36px;
+  top: 8px;
+  color: white;
+  font-family: impact;
+}
+
+.version {
+  position: absolute;
+  width: 100%;
+  left: 22.5%;
+  font-size: 16px;
+  top: 50px;
+  color: white;
+}
+
+.footer-info {
+  display: inline-block;
+  /*background-color: grey;*/
+  width: 25%;
+  height: 100%;
+  /*text-align: center;*/
+  position: relative;
+  left: 25%;
+}
+
+.footer-header {
+  /*background-color: blue;*/
+  font-size: 30px;
+  font-weight: bold;
+  color: aquamarine;
+}
+
+.footer-github {
+  font-size: 20px;
+  color: silver;
+}
+
+.footer-github:hover, .footer-github:focus {
+  color: silver;
+}
+
+#rendered_view {}
+
+.custom_nav {
+  width: 100%;
+}
+
+.wrapper {
+  padding: 5px;
+  background-color: gainsboro;
+}
+
+.filter-name {
+  font-size: 18px;
+}
+
+.progress-wrapper {
+  margin: 0 auto;
+  float: none;
+}
+
+.body {
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.section-header {
+  text-align: center;
+  margin: 0 auto;
+  color: black;
+}
+
+.stats {
+  float: center;
+  margin: 0 auto;
+  text-align: left;
+  display: inline-block;
+}
+
+.stats-scheduled {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.itinerary {
+  background-color: white;
+}
+
+.trip-button {}
+
+.trip-button-clicked {
+  color: teal;
+  font-weight: bolder;
+  font-style: oblique;
+}
+
+.center {
+  /*background-color: brown;*/
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+  top: 30%;
+  /*padding-top: 5px;*/
+  /*padding-bottom: 5px;*/
+}
+
+/* ids */
+#pasttrips_link {
+  position: absolute;
+  top: 30px;
+  left: 45%;
+  color: white;
+  font-size: 16px;
+}
+
+#proposedtrips_link {
+  position: absolute;
+  top: 30px;
+  left: 56%;
+  color: white;
+  font-size: 16px;
+}
+
+#inprogresstrips_link {
+  position: absolute;
+  top: 30px;
+  left: 68%;
+  color: white;
+  font-size: 16px;
+}
+
+#login_link {
+  position: absolute;
+  top: 30px;
+  right: 60px;
+  color: white;
+  font-size: 16px;
+}
+
+#stats-wrapper {
+  margin: 0 auto;
+  margin-top: 25px;
+  overflow: hidden;
+  text-align: center;
+}
+
+#map {
+  height: 750px;
+  width: 95%;
+  margin: auto;
+}
+
+#type-filter {
+  margin-right: 15px;
+}
+
+#filters_wrapper {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+#contact-info {
+  display: inline-block;
+  /*background-color: green;*/
+  position: relative;
+  /*top: 0px;*/
+  /*right: 35%;*/
+  /*margin-left: 250px;*/
+  left: 25%;
+  /*text-align: center;*/
+}
+
+.email {
+  font-size: 20px;
+  color: silver;
+}
+
+.email:hover, .email:focus {
+  color: silver;
+}
+
+#country-filter-wrapper {
+  margin-left: 20px;
+}
+
+/* animations */
+button.ng-enter {
+  transition: 1s;
+}
+button.ng-leave {
+    transition: 0s;
+}
+
+button.ng-leave.ng-leave-active,
+button.ng-enter {
+    opacity: 0;
+}
+
+button.ng-enter.ng-enter-active,
+button.ng-leave {
+    opacity: 1;
+}

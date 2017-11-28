@@ -1,0 +1,26 @@
+<div class="img-gallery">
+  <br/>
+  <h1 class="section-header"> {{imageGalleryCtrl.seltrip}} </h1>
+  <br/>
+
+  <!-- Progress Bar for loading images -->
+  <div class="col-sm-2 progress-wrapper">
+    <uib-progressbar ng-class="{'progress-striped active': imageGalleryCtrl.loading_images, 'progress': !imageGalleryCtrl.loading_images}" value="dynamic" type={{imageGalleryCtrl.progress_type}}><i>{{imageGalleryCtrl.loading_text}}</i></uib-progressbar>
+  </div>
+
+  <p class="body"> <em>Trip Statistics</em>
+    <div id="stats-wrapper">
+      <div class="stats">
+        <ul style="list-style-type:square">
+          <li> duration: <b>{{imageGalleryCtrl.seltrip_duration}}</b> </li>
+          <li> people: <b>{{imageGalleryCtrl.seltrip_people}}</b> </li>
+        </ul>
+      </div>
+    </div>
+  </p>
+
+  <!-- Images -->
+  <div class="image-wrapper" ng-repeat="image in imageGalleryCtrl.seltrip_images" done-notify="imageGalleryCtrl.handleAllImagesRendered()">
+    <img ng-src="{{imageGalleryCtrl.seltrip_images[$index]}}" ng-click="imageGalleryCtrl.openImageCarousel($index)"></img>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <h1 class="section-header"> Scheduled Trips </h1>
+
+  <p class="body"> <em>Here is some general info about our scheduled trips</em>
+    <div id="stats-wrapper">
+      <div class="stats">
+        <ul style="list-style-type:circle">
+          <li> number of trips scheduled <b>{{proposedTripsCtrl.number_of_trips}}</b> </li>
+        </ul>
+      </div>
+    </div>
+  </p>
+
+  <div class="row">
+    <button class="col-md-4" ng-class="{'trip-button-clicked': trip.clicked, 'trip-button': !trip.clicked}" ng-repeat="trip in proposedTripsCtrl.all_trips" ng-click="proposedTripsCtrl.displayTripInfo( trip.name )">{{trip.name}}</button>
+  </div>
+
+  <div ng-show="proposedTripsCtrl.selected_trip">
+    <br />
+    <h1 class="section-header"> {{proposedTripsCtrl.selected_trip}} </h1>
+
+    <p class="body">
+      <div id="stats-wrapper">
+        <div>
+          <span class="stats-scheduled"> duration: <b>{{proposedTripsCtrl.trip_duration}}</b> </span>
+          <span class="stats-scheduled"> people: <b>{{proposedTripsCtrl.trip_people}}</b> </span>
+        </div>
+        <br />
+        <span class="stats-scheduled"> ITINERARY </span>
+        <div>
+          <iframe class="itinerary" src={{proposedTripsCtrl.itinerary_link}} width="75%" height="400"></iframe>
+        </div>
+      </div>
+    </p>
+  </div>
+
+  <br />
+  <div id="map"></div>
+
+</div>
