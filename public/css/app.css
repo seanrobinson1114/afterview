@@ -218,26 +218,18 @@ footer {
   margin: auto;
 }
 
-#type-filter {
-  margin-right: 15px;
-}
-
 #filters_wrapper {
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  max-width: 401px;
   font-size: 16px;
   margin: 0 auto;
-  margin-top: 25px;
 }
 
 #contact-info {
   display: inline-block;
   position: relative;
   left: 25%;
-}
-
-#country-filter-wrapper {
-  margin-left: 20px;
 }
 
 /* animations */
