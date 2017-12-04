@@ -41,6 +41,11 @@ module.exports =
   {
     console.log( 'Checking users credentials for login' );
 
+    // console.log( 'salt' );
+    // let temp = genSalt( 16 );
+    // console.log( temp );
+    // console.log( hashPass( temp, password ) );
+
     return User.find( {"username": username} ).lean().exec().then(
       function success( user )
       {

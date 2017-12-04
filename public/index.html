@@ -9,8 +9,8 @@
     <title>AfterView</title>
 
     <!-- icon -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="js/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -42,89 +42,70 @@
 
   </head>
 
-  <header>
-    <span class="title"> AfterView </span>
-    <span class="version"> B.0.0.1 </span>
-
-    <a ui-sref="pasttrips" id="pasttrips_link"><span class="glyphicon glyphicon-picture"></span> Past Trips </a>
-    <a ui-sref="proposedtrips" id="proposedtrips_link"><span class="glyphicon glyphicon-calendar"></span> Proposed Trips </a>
-    <a ui-sref="inprogresstrips" id="inprogresstrips_link"><span class="glyphicon glyphicon-road"></span> In Progress </a>
-    <a id="login_link"></a>
-  </header>
-
   <!-- <body onload="init();"> -->
   <body>
+
+    <div class="header-wrapper">
+      <header>
+        <div class="fluid-container">
+
+          <div>
+            <img src="mountain-15-48-260771.png" style="filter: brightness(100%) drop-shadow(0px -5px 10px white)"></img>
+            <div id="login_link"></div>
+          </div>
+
+          <div class="nav-container">
+
+            <nav class="page-nav">
+
+              <ul class="nav-ul">
+
+                <li class="nav-li">
+                  <a class="nav-a" ui-sref="pasttrips"><span class="glyphicon glyphicon-picture"></span> Past </a>
+                </li>
+
+                <li class="nav-li">
+                  <a class="nav-a" ui-sref="proposedtrips"><span class="glyphicon glyphicon-calendar"></span> Scheduled </a>
+                </li>
+
+                <li class="nav-li">
+                  <a class="nav-a" ui-sref="inprogresstrips"><span class="glyphicon glyphicon-road"></span> Active </a>
+                </li>
+
+              </ul>
+
+            </nav>
+
+          </div>
+
+        </div>
+      </header>
+    </div>
+
+    <script src="js/services/UseBrowInfo.js"></script>
+
 
     <!-- <canvas id="canvas" width="300" height="300"></canvas> -->
 
     <!-- current rendered view base on selected route from navbar -->
     <div id="rendered_view" ui-view></div>
 
-    <script>
-      if( window.localStorage )
-      {
-        // Check for username and make request if it doesn't exist
-        if( localStorage.getItem( 'username' ) == undefined )
-        {
-          // Create request and initialize
-          let req = new XMLHttpRequest();
-          req.open( 'GET', 'http://localhost:3000/uinf/uname', true );
-
-          // Check if request is complete on any state change
-          req.onreadystatechange = function()
-          {
-            console.log( 'checking for response from username request' );
-
-            if( req.readyState === XMLHttpRequest.DONE && req.status === 200 )
-            {
-              localStorage.setItem( 'username', JSON.parse( req.responseText ) );
-              document.getElementById( 'login_link' ).innerHTML = '<span class="glyphicon glyphicon-user"></span>' + JSON.parse( req.responseText );
-            }
-          };
-
-          // Send request
-          req.send();
-        }
-        else
-          document.getElementById( 'login_link' ).innerHTML = '<span class="glyphicon glyphicon-user"></span>' + localStorage.getItem( 'username' );
-      }
-
-      // Attempt to get token from server if it doesn't exist
-      if( !localStorage.getItem( 'token' ) )
-      {
-        // Create request for token
-        let req = new XMLHttpRequest();
-        req.open( 'GET', 'http://localhost:3000/getToken', true );
-
-        // Check if request is complete on any state change
-        req.onreadystatechange = function()
-        {
-          console.log( 'checking for response from token request' );
-
-          if( req.readyState === XMLHttpRequest.DONE && req.status === 200 )
-          {
-            localStorage.setItem( 'token', JSON.parse( req.responseText ) );
-          }
-        };
-
-        // Send request
-        req.send();
-      }
-    </script>
+    <div class="header-wrapper">
+      <footer>
+        <div class="fluid-container-footer">
+          <div class="footer-container">
+            <div class="footer-header">AfterView</div>
+            <div class="footer-github"> version 0.1.0 </div>
+            <a class="footer-github" href="https://github.com/seanrobinson1114" target="_blank">github</a>
+          </div>
+          <div class="footer-container">
+            <div class="footer-header">Contact</div>
+            <a class="email" href="mailto:seanrobinson1114@gmail.com">email</a>
+          </div>
+        </div>
+      </footer>
+    </div>
 
   </body>
-
-  <footer>
-    <div class="center">
-      <div class="footer-info">
-        <div class="footer-header">AfterView</div>
-        <a class="footer-github" href="https://github.com/seanrobinson1114" target="_blank">github</a>
-      </div>
-      <div id="contact-info">
-        <div class="footer-header">Contact</div>
-        <a class="email" href="mailto:seanrobinson1114@gmail.com">seanrobinson1114@gmail.com</a>
-      </div>
-    </div>
-  </footer>
 
 </html>

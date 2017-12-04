@@ -19,6 +19,11 @@ angular.module( 'AfterView.TripService', [] )
       scheduled_trips_url = UrlManager.scheduled_trips_url,
       scheduled_trip_duration_url = UrlManager.scheduled_trip_duration_url,
       scheduled_trip_people_url = UrlManager.scheduled_trip_people_url,
+      visited_locations_url = UrlManager.visited_locations_url,
+      number_of_trips_url = UrlManager.number_of_trips_url,
+      number_of_visited_locations_url = UrlManager.number_of_visited_locations_url,
+      get_duration_url = UrlManager.get_duration_url,
+      get_people_url = UrlManager.get_people_url,
       custom_header = {'x-access-token': localStorage.getItem( 'token' ) };
 
   // Functions
@@ -229,7 +234,7 @@ angular.module( 'AfterView.TripService', [] )
   // Returns promise that resolves to array of visited locations objects
   var getAllVisitedLocations = function()
   {
-    return $http.get( 'http://localhost:3000/vlocations', {headers: custom_header} ).then(
+    return $http.get( visited_locations_url, {headers: custom_header} ).then(
       function success( response )
       {
         console.log( 'TripService: getAllVisitedLocations(): Successfully retrieved response' );
@@ -259,7 +264,7 @@ angular.module( 'AfterView.TripService', [] )
   // Get number of trips
   var getNumberOfTrips = function()
   {
-    return $http.get( 'http://localhost:3000/trips/getNumberOfTrips', {headers: custom_header} ).then(
+    return $http.get( number_of_trips_url, {headers: custom_header} ).then(
       function success( response )
       {
         console.log( 'TripService: getNumberOfTrips(): Successfully retrieved response' );
@@ -289,7 +294,7 @@ angular.module( 'AfterView.TripService', [] )
   // Get number of visited locations
   var getNumberOfVisitedLocations = function()
   {
-    return $http.get( 'http://localhost:3000/vlocations/getNumberOfLocations', {headers: custom_header} ).then(
+    return $http.get( number_of_visited_locations_url, {headers: custom_header} ).then(
       function success( response )
       {
         console.log( 'TripService: getNumberOfVisitedLocations(): Successfully retrieved response' );
@@ -319,7 +324,7 @@ angular.module( 'AfterView.TripService', [] )
   // Get number of trip
   var getDuration = function( trip_name )
   {
-    return $http.get( 'http://localhost:3000/trips/getDuration/' + trip_name, {headers: custom_header} ).then(
+    return $http.get( get_duration_url + trip_name, {headers: custom_header} ).then(
       function success( response )
       {
         console.log( 'TripService: getTripDuration(): Successfully retrieved response' );
@@ -349,7 +354,7 @@ angular.module( 'AfterView.TripService', [] )
   // Get people present on trip
   var getPeople = function( trip_name )
   {
-    return $http.get( 'http://localhost:3000/trips/getPeople/' + trip_name, {headers: custom_header} ).then(
+    return $http.get( get_people_url + trip_name, {headers: custom_header} ).then(
       function success( response )
       {
         console.log( 'TripService: getPeople(): Successfully retrieved response' );

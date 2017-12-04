@@ -10,47 +10,24 @@ html {
   width: 100%;
 }
 
-body {
-  position: absolute;
-  top: 80px;
-  background-color: black;
-  width: 100%;
-}
-
-nav {
-  margin-bottom: 0px !important;
-}
-
 header {
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  background-color: darkslategrey;
-  width: 100vw;
-  height: 80px;
+  position: relative;
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: #24292e;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 footer {
-  width: 100vw;
-  height: 200px;
-  background-color: darkslategrey;
+  background-color: #24292e;
 }
 
 /* classes */
-.img-gallery {
-  background-color: gainsboro;
-}
-
-.carousel-right-btn {
-  /*position: absolute;*/
-  width: 50px;
-  height: 50px;
-  right: 0px;
-}
-
 .modal-dialog {
   position: fixed;
-  /*top: 2%;*/
   left: 15%;
 }
 
@@ -59,49 +36,19 @@ footer {
   text-align: center;
 }
 
-.image-carousel {
+/*.image-carousel {
   width: calc( 95vh * 1.5 );
   height: 95vh;
-}
-
-.title {
-  position: absolute;
-  width: 100%;
-  left: 20%;
-  font-size: 36px;
-  top: 8px;
-  color: white;
-  font-family: impact;
-}
-
-.version {
-  position: absolute;
-  width: 100%;
-  left: 22.5%;
-  font-size: 16px;
-  top: 50px;
-  color: white;
-}
-
-.footer-info {
-  display: inline-block;
-  /*background-color: grey;*/
-  width: 25%;
-  height: 100%;
-  /*text-align: center;*/
-  position: relative;
-  left: 25%;
-}
+}*/
 
 .footer-header {
-  /*background-color: blue;*/
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
   color: aquamarine;
 }
 
 .footer-github {
-  font-size: 20px;
+  font-size: 16px;
   color: silver;
 }
 
@@ -109,10 +56,78 @@ footer {
   color: silver;
 }
 
-#rendered_view {}
+.fluid-container {
+  display: flex;
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}
 
-.custom_nav {
-  width: 100%;
+.fluid-container-footer {
+  display: flex;
+  max-width: 450px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}
+
+.nav-container {
+  clear: none;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.page-nav {
+  display: block;
+  box-sizing: border-box;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+.nav-ul {
+  display: flex;
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+.nav-a {
+  border-top: 0px;
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 0;
+  color: rgba(255,255,255,0.75);
+}
+
+.nav-a:hover {
+  color: rgba(255,255,255,1);
+  text-decoration: none !important;
+}
+
+.nav-a:focus, .nav-a:active {
+  color: rgba(255,255,255,1);
+  text-decoration: none !important;
+}
+
+.nav-li {
+  margin-left: 30px;
+  box-sizing: border-box;
+}
+
+.header-wrapper {
+  position: relative;
+  font-size: 32px;
+}
+
+.footer-container {
+  margin: 50px;
 }
 
 .wrapper {
@@ -167,46 +182,27 @@ footer {
 }
 
 .center {
-  /*background-color: brown;*/
   width: 60%;
   margin: 0 auto;
   position: relative;
   top: 30%;
-  /*padding-top: 5px;*/
-  /*padding-bottom: 5px;*/
+}
+
+.email {
+  font-size: 16px;
+  color: silver;
+}
+
+.email:hover, .email:focus {
+  color: silver;
 }
 
 /* ids */
-#pasttrips_link {
-  position: absolute;
-  top: 30px;
-  left: 45%;
-  color: white;
-  font-size: 16px;
-}
-
-#proposedtrips_link {
-  position: absolute;
-  top: 30px;
-  left: 56%;
-  color: white;
-  font-size: 16px;
-}
-
-#inprogresstrips_link {
-  position: absolute;
-  top: 30px;
-  left: 68%;
-  color: white;
-  font-size: 16px;
-}
+#rendered_view {}
 
 #login_link {
-  position: absolute;
-  top: 30px;
-  right: 60px;
-  color: white;
   font-size: 16px;
+  color: rgba(255,255,255,0.75);
 }
 
 #stats-wrapper {
@@ -236,22 +232,8 @@ footer {
 
 #contact-info {
   display: inline-block;
-  /*background-color: green;*/
   position: relative;
-  /*top: 0px;*/
-  /*right: 35%;*/
-  /*margin-left: 250px;*/
   left: 25%;
-  /*text-align: center;*/
-}
-
-.email {
-  font-size: 20px;
-  color: silver;
-}
-
-.email:hover, .email:focus {
-  color: silver;
 }
 
 #country-filter-wrapper {
