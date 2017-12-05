@@ -36,10 +36,10 @@ footer {
   text-align: center;
 }
 
-/*.image-carousel {
+.image-carousel {
   width: calc( 95vh * 1.5 );
   height: 95vh;
-}*/
+}
 
 .footer-header {
   font-size: 24px;
@@ -137,6 +137,12 @@ footer {
 
 .filter-name {
   font-size: 18px;
+  /*display: inline;*/
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
 }
 
 .progress-wrapper {
@@ -173,7 +179,9 @@ footer {
   background-color: white;
 }
 
-.trip-button {}
+.trip-button-mobile {
+  display: block;
+}
 
 .trip-button-clicked {
   color: teal;
@@ -195,6 +203,11 @@ footer {
 
 .email:hover, .email:focus {
   color: silver;
+}
+
+.trip-select-buttons {
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 
 /* ids */
@@ -221,9 +234,13 @@ footer {
 #filters_wrapper {
   display: flex;
   justify-content: space-between;
-  max-width: 401px;
+  box-sizing: border-box;
+  max-width: 400px;
   font-size: 16px;
-  margin: 0 auto;
+  margin-top: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 }
 
 #contact-info {

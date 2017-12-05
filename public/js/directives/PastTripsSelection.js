@@ -24,6 +24,10 @@ angular.module( 'AfterView.PastTripsSelection', [] )
       this.country_filter = 'All';
       this.selected_trip_name = null;
 
+      // Check the type of device
+      this.mobile_device = navigator.userAgent.match(/android|iphone/i) != null;
+      console.log( 'MOBILE: ', this.mobile_device );
+
       // Get all trip objects
       TripService.getAllTrips().then(
         function( trips )

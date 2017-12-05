@@ -20,7 +20,7 @@
 
 <div id="filters_wrapper">
   <!-- Type Filter -->
-  <div>
+  <div class="filter">
     <span class="filter-name"> Activity </span>
     <div class="btn-group" uib-dropdown>
       <button type="button" class="btn btn-primary"> {{pastTripsSelectionCtrl.type_filter}} </button>
@@ -36,7 +36,7 @@
   </div>
 
   <!-- State Filter -->
-  <div>
+  <div class="filter">
     <span class="filter-name"> State </span>
     <div class="btn-group" uib-dropdown>
       <button type="button" class="btn btn-primary"> {{pastTripsSelectionCtrl.state_filter}} </button>
@@ -52,7 +52,7 @@
   </div>
 
   <!-- Country Filter -->
-  <div>
+  <div class="filter">
     <span class="filter-name"> Country </span>
     <div class="btn-group" uib-dropdown>
       <button type="button" class="btn btn-primary"> {{pastTripsSelectionCtrl.country_filter}} </button>
@@ -65,12 +65,11 @@
         <li role="menuitem" ng-click="pastTripsSelectionCtrl.setFilter( pastTripsSelectionCtrl.type_filter, pastTripsSelectionCtrl.state_filter, 'All')"><a href="#"> All </a></li>
       </ul>
     </div>
-    <br></br>
   </div>
 </div>
 
-<div class="row">
-  <button class="col-md-4" ng-class="{'trip-button-clicked': trip.clicked, 'trip-button': !trip.clicked}" ng-repeat="trip in pastTripsSelectionCtrl.display_trips" ng-click="pastTripsSelectionCtrl.loadImageGallery( trip )">{{trip.name}}</button>
+<div class="trip-select-buttons">
+  <button class="col-md-4" ng-class="{'trip-button-clicked': trip.clicked, 'trip-button': !trip.clicked, 'trip-button-mobile': {{pastTripsSelectionCtrl.mobile_device}}}" ng-repeat="trip in pastTripsSelectionCtrl.display_trips" ng-click="pastTripsSelectionCtrl.loadImageGallery( trip )">{{trip.name}}</button>
 </div>
 
 <!-- Map with trip locations -->
