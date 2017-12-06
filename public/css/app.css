@@ -28,7 +28,10 @@ footer {
 /* classes */
 .modal-dialog {
   position: fixed;
-  left: 15%;
+  width: auto;
+  display: inline-block;
+  left: 50%;
+  transform: translate(-50%) !important;
 }
 
 .image-wrapper {
@@ -36,9 +39,14 @@ footer {
   text-align: center;
 }
 
+.trip-image {
+  max-width: 100%;
+  height: auto;
+}
+
 .image-carousel {
   width: calc( 95vh * 1.5 );
-  height: 95vh;
+  height: auto;
 }
 
 .footer-header {

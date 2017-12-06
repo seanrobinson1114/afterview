@@ -23,6 +23,10 @@ angular.module( 'AfterView.ImageGallery', [] )
       // Data
       var that = this
 
+      // Check the type of device
+      this.mobile_device = navigator.userAgent.match(/android|iphone/i) != null;
+      console.log( 'MOBILE: ', this.mobile_device );
+
       // Functions
       // Get information for selected trip
       this.getTripData = function( trip_name )
@@ -110,66 +114,69 @@ angular.module( 'AfterView.ImageGallery', [] )
 
       // Custom modals
       // This modal opens after clicking on image
-      this.openImageCarousel = function( image_index )
+      this.handleImageClick = function( image_index )
       {
-        let image_carousel_modal = $uibModal.open(
+        let image_carousel_modal = $uibModal;
+
+        if( !this.mobile_device )
         {
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'templates/image-carousel.html',
-          controllerAs: 'imageCarouselCtrl',
-          controller: function( $uibModalInstance )
+          image_carousel_modal.open(
           {
-            // Data
-            this.current_image_src = that.seltrip_images[image_index];
-
-            // Functions
-            // Display new image
-            this.handleKeyEvent = function( event )
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'templates/image-carousel.html',
+            controllerAs: 'imageCarouselCtrl',
+            controller: function( $uibModalInstance )
             {
-              console.log( 'imageCarouselCtrl: displaying next image' );
-              console.log( 'event: ', event );
+              // Data
+              this.current_image_src = that.seltrip_images[image_index];
 
-              console.log( document.activeElement );
-
-              if( event.key === 'ArrowDown' )
+              // Functions
+              // Display new image
+              this.handleKeyEvent = function( event )
               {
-                image_index + 1 > that.seltrip_images.length - 1 ? image_index = 0 : ++ image_index;
-                this.current_image_src = that.seltrip_images[image_index];
-                console.log( image_index );
-              }
+                console.log( 'imageCarouselCtrl: displaying next image' );
+                console.log( 'event: ', event );
 
-              else if( event.key === 'ArrowUp' )
+                if( event.key === 'ArrowDown' )
+                {
+                  image_index + 1 > that.seltrip_images.length - 1 ? image_index = 0 : ++ image_index;
+                  this.current_image_src = that.seltrip_images[image_index];
+                  console.log( image_index );
+                }
+
+                else if( event.key === 'ArrowUp' )
+                {
+                  image_index - 1 < 0 ? image_index = that.seltrip_images.length - 1 : --image_index;
+                  this.current_image_src = that.seltrip_images[image_index];
+                  console.log( image_index );
+                }
+
+              };
+
+              // Closes the modal
+              this.cancel = function()
               {
-                image_index - 1 < 0 ? image_index = that.seltrip_images.length - 1 : --image_index;
-                this.current_image_src = that.seltrip_images[image_index];
-                console.log( image_index );
+                console.log( 'cancelling modal' );
+
+                $uibModalInstance.dismiss( 'cancel' );
+              };
+            }
+            // Executed when modal is finished rendering
+          }).rendered.then(
+              function()
+              {
+                console.log( 'modal rendered' );
+
+                // Must be selected by querying activeElement otherwise doesn't seem to work
+                document.activeElement.firstChild.firstChild.firstChild.focus();
+                console.log( document.activeElement );
               }
-
-            };
-
-            // Closes the modal
-            this.cancel = function()
-            {
-              console.log( 'cancelling modal' );
-
-              $uibModalInstance.dismiss( 'cancel' );
-            };
-          }
-        });
-
-        // Executed when modal is finished rendering
-        image_carousel_modal.rendered.then(
-          function()
-          {
-            console.log( 'modal rendered' );
-
-            // Must be selected by querying activeElement otherwise doesn't seem to work
-            document.activeElement.firstChild.firstChild.firstChild.focus();
-            console.log( document.activeElement );
-          }
-        );
+            );
+        }
+        else
+          console.log( 'Clicked Image on Mobile Device' );
       };
 
     }

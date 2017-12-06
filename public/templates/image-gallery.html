@@ -21,6 +21,6 @@
 
   <!-- Images -->
   <div class="image-wrapper" ng-repeat="image in imageGalleryCtrl.seltrip_images" done-notify="imageGalleryCtrl.handleAllImagesRendered()">
-    <img ng-src="{{imageGalleryCtrl.seltrip_images[$index]}}" ng-click="imageGalleryCtrl.openImageCarousel($index)"></img>
+    <img class="trip-image" ng-src="{{imageGalleryCtrl.seltrip_images[$index]}}" ng-click="imageGalleryCtrl.handleImageClick($index)"></img>
   </div>
 </div>
