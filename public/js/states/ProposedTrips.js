@@ -21,7 +21,7 @@ angular.module( 'AfterView.ProposedTrips', [] )
 
 }]) // End of state config
 
-// Stores state parameters so they can be passed to directives and determine views
+// Controller
 .controller('proposedTripsCtrl', ['TripService', 'ScheduledTripsMap', function( TripService, ScheduledTripsMap )
 {
   // Member Data

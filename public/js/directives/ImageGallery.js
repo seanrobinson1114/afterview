@@ -20,7 +20,7 @@ angular.module( 'AfterView.ImageGallery', [] )
     bindToController: true,
     controller: function( $scope )
     {
-      console.log('LOCATION', navigator.geolocation.getCurrentPosition(function(pos) {console.log(pos);}));
+      // console.log('LOCATION', navigator.geolocation.getCurrentPosition(function(pos) {console.log(pos);}));
 
       // Data
       var that = this
