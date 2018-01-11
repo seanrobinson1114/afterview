@@ -4,13 +4,14 @@
   "version": "0.0.1",
   "description": "node project for couple things",
   "main": "server.js",
-  "scripts": {
-    "install-deps": "cp package.json public/js; cd public/js; npm install --production; rm package.json",
-    "install-dev-deps": "npm install --only=dev",
-    "start-server": "node_modules/nodemon/bin/nodemon.js server.js",
-    "update-webdriver": "node_modules/protractor/node_modules/webdriver-manager/bin/webdriver-manager update",
-    "e2e-tests": "node_modules/protractor/bin/protractor protractor.conf.js",
-    "unit-tests": "node_modules/karma/bin/karma start"
+    "scripts": {
+	"start": "cp package.json public/js; cd public/js; npm install --production; rm package.json; cd ../..; node server.js",
+	"install-deps": "cp package.json public/js; cd public/js; npm install --production; rm package.json",
+	"install-dev-deps": "npm install --only=dev",
+	"start-server": "node_modules/nodemon/bin/nodemon.js server.js",
+	"update-webdriver": "node_modules/protractor/node_modules/webdriver-manager/bin/webdriver-manager update",
+	"e2e-tests": "node_modules/protractor/bin/protractor protractor.conf.js",
+	"unit-tests": "node_modules/karma/bin/karma start"
   },
   "author": "robinson",
   "license": "MIT",
