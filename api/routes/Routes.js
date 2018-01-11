@@ -14,7 +14,8 @@ module.exports = function( app )
         auth = require( 'basic-auth' ),
         path = require( 'path' ),
         jwt = require( 'jsonwebtoken' ),
-        crypto = require( 'crypto' );
+        crypto = require( 'crypto' ),
+        gcs = require( '@google-cloud/storage' )();
 
   var jwt_info =
   {

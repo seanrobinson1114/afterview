@@ -73,7 +73,7 @@ angular.module( 'AfterView.ImageGallery', [] )
               // Change each element to be external location of image
               for( let i = 0; i < that.seltrip_images.length; ++i )
               {
-                that.seltrip_images[i] = UrlManager.image_base_url + trip_name + '/' + that.seltrip_images[i] + '?token=' + TripService.getToken();
+                that.seltrip_images[i] = UrlManager.image_base_url + trip_name + '/' + that.seltrip_images[i]; //+ '?token=' + TripService.getToken();
               }
             }
           }

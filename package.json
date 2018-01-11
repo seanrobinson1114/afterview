@@ -41,6 +41,7 @@
     "basic-auth": "latest",
     "jsonwebtoken": "latest",
     "three": "latest",
+    "@google-cloud/storage": "latest",
 
     "angular": "1.5.6",
     "angular-ui-bootstrap": "2.4.0",

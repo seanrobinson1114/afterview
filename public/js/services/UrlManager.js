@@ -19,7 +19,7 @@ angular.module( 'AfterView.UrlManager', [] )
       scheduled_trips_url = location.protocol + '//' + location.host + '/schdtrips',
       scheduled_trip_duration_url = location.protocol + '//' + location.host + '/schdtrips/getDuration/',
       scheduled_trip_people_url = location.protocol + '//' + location.host + '/schdtrips/getPeople/',
-      image_base_url = location.protocol + '//' + location.host + '/images/',
+      image_base_url = 'https://storage.googleapis.com/afterview-image/images/',
       visited_locations_url = location.protocol + '//' + location.host + '/vlocations',
       number_of_trips_url = location.protocol + '//' + location.host + '/trips/getNumberOfTrips',
       number_of_visited_locations_url = location.protocol + '//' + location.host + '/vlocations/getNumberOfLocations',
@@ -38,7 +38,7 @@ angular.module( 'AfterView.UrlManager', [] )
     scheduled_trip_duration_url: scheduled_trip_duration_url,
     scheduled_trip_people_url: scheduled_trip_people_url,
     image_base_url: image_base_url,
-    
+
     visited_locations_url: visited_locations_url,
     number_of_trips_url: number_of_trips_url,
     number_of_visited_locations_url: number_of_visited_locations_url,

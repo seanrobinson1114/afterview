@@ -7,7 +7,8 @@
 
 const mongoose = require( 'mongoose' ),
     PastTrip = mongoose.model( 'PastTrips' ),
-    fs = require( 'fs' );
+    fs = require( 'fs' ),
+    https = require( 'https' );
 
 // Define object to be exported
 module.exports =
@@ -26,21 +27,56 @@ module.exports =
     );
   },
   // Returns all pictures for specified trip
-  listAllPicturesFromTrip: function( request, response )
+  listAllPicturesFromTrip: function( request, response_ini )
   {
     var images = [];
-    fs.readdir( './public/images/' + request.params.tripName + '/',
-      function( error, files )
+    https.get( 'https://content.googleapis.com/storage/v1/b/afterview-image/o?prefix=images/' + request.params.tripName,
+      function( response )
       {
-        files.forEach(
-          function( file )
+        var image_names = [];
+        var data = '';
+
+        response.on( 'data',
+          function( chunk )
           {
-            images.push( file );
+            process.stdout.write( chunk );
+            console.log( '\n' );
+            data += chunk.toString();
           }
         );
-        response.json( images );
+        response.on( 'end',
+          function()
+          {
+            let temp = JSON.parse( data );
+            for( let i = 0; i < temp.items.length; ++i )
+            {
+              let split_str = temp.items[i].name.split( '/' );
+              image_names.push( split_str[split_str.length - 1] );
+            }
+            console.log( 'image_names', image_names );
+            response_ini.json( image_names );
+          }
+        );
+      },
+      function error( response )
+      {
+        console.log( 'error retrieving list of images from google clould storage' );
       }
     );
+
+    // var images = [];
+    // fs.readdir( './public/images/' + request.params.tripName + '/',
+    //   function( error, files )
+    //   {
+    //     files.forEach(
+    //       function( file )
+    //       {
+    //         images.push( file );
+    //       }
+    //     );
+    //     response.json( images );
+    //   }
+    // );
   },
   // Returns list of all trip names
   listAllTripNames: function( request, response )
