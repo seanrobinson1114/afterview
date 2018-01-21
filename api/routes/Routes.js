@@ -155,10 +155,10 @@ module.exports = function( app )
     );
 
   // Prevent access to api calls if user doesn't have valid token
-  app.get( '/trips/*', check_token );
+//  app.get( '/trips/*', check_token );
   // app.get( '/images/*', check_token );
   // app.get( '/uinf/*', check_token );
-  app.get( '/vlocations/*', check_token );
+//  app.get( '/vlocations/*', check_token );
 
   // Get the username of person logged in
   app.route( '/uinf/uname' )
