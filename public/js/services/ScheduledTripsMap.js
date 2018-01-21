@@ -14,16 +14,6 @@ angular.module( 'AfterView.ScheduledTripsMap', [] )
       map,
       markers = [];
 
-  // Get all visited locations and generate markers
-  TripService.getAllVisitedLocations().then(
-    function( locations )
-    {
-      console.log( 'PastTripsMap: got response from TripService.getAllVisitedLocations()' );
-
-      generateMarkers( locations );
-    }
-  );
-
   // Functions
   // Generate the map markers
   var generateMarkers = function( locations )
@@ -39,7 +29,7 @@ angular.module( 'AfterView.ScheduledTripsMap', [] )
                                              animation: google.maps.Animation.DROP} ) );
 
     console.log( new google.maps.Marker() );
-    generateMarkerInfoWindows( markers );
+    // generateMarkerInfoWindows( markers );
   };
 
   // Generate the marker info windows
@@ -107,18 +97,21 @@ angular.module( 'AfterView.ScheduledTripsMap', [] )
     console.log( 'PastTripMaps: initializing the map' );
 
     map = new google.maps.Map( document.getElementById( 'map' ), {
-      zoom: 3,
-      center: {lat: 48, lng: -60}
+      zoom: 6,
+      center: {lat: 40.81, lng: -96.68}
     });
   };
 
   // Create all markers and add to map
-  var showTripMarkers = function( displayed_trips )
+  var showTripMarkers = function( locations )
   {
-    console.log( 'PastTripsMap: showing trip markers', displayed_trips.length );
+    console.log( 'PastTripsMap: showing trip markers', locations.length );
+
+    // Generate the markers
+    generateMarkers( locations );
 
     // Check for empty list
-    if( displayed_trips.length == 0 )
+    if( locations.length == 0 )
     {
       markers.forEach(
         function( marker )
@@ -128,17 +121,32 @@ angular.module( 'AfterView.ScheduledTripsMap', [] )
       );
     }
 
+    // Set map for markers
     for( let i = 0; i < markers.length; ++i )
     {
-      for( let j = 0; j < displayed_trips.length; ++j )
+      markers[i].setMap( map );
+    }
+
+    // Display arrows between markers
+    var line_symbol = {
+      path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+    };
+
+    // Create the polyline and add the symbol via the 'icons' property.
+    // TODO move to function
+    for( let i = 0; i < locations.length; ++i )
+    {
+      if( locations[i+1] )
       {
-        if( markers[i].trips.includes( displayed_trips[j].name ) )
-        {
-          markers[i].setMap( map );
-          break;
-        }
-        else
-          markers[i].setMap( null );
+        // Create line between two coords
+        var line = new google.maps.Polyline({
+          path: [locations[i].coord, locations[i+1].coord],
+          icons: [{
+            icon: line_symbol,
+            offset: '100%'
+          }],
+          map: map
+        });
       }
     }
   };
