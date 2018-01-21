@@ -73,6 +73,9 @@ angular.module( 'AfterView.ProposedTrips', [] )
       }
     );
 
+    // Display trip route on map
+    ScheduledTripsMap.showTripMarkers( this.all_trips[0].locations );
+
     // Reset clicked properties for each trip
     this.all_trips.forEach(
       function( trip_obj )
