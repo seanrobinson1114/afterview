@@ -1,0 +1,157 @@
+/* default react stuff */
+.App {
+  text-align: center;
+}
+
+.App-title {
+  color: white;
+  font-size: 1.5em;
+  margin-top: 50px;
+  animation: App-title-slide 3s 3s forwards;
+}
+
+
+
+
+/* my styles */
+.emoji_left {
+  position: absolute;
+  left: calc(50vw - 30px);
+  top: 10px;
+  color: orange;
+  animation: emoji-move-left 3s forwards;
+}
+
+.tent_emoji_left {
+  position: absolute;
+  top: 80px;
+  left: calc(50vw - 130px);
+  color: orange;
+  opacity: 0;
+  animation: tent-popup 3s 3s forwards;
+}
+
+.emoji_right {
+  position: absolute;
+  top: 10px;
+  left: calc(50vw);
+  color: black;
+  animation: emoji-move-right 3s forwards;
+}
+
+.tent_emoji_right {
+  position: absolute;
+  top: 80px;
+  left: calc(50vw + 95px);
+  color: orange;
+  opacity: 0;
+  animation: tent-popup 3s 3s forwards;
+}
+
+@keyframes tent-popup {
+  to { opacity: 1; }
+}
+
+@keyframes emoji-move-left {
+  from { transform: rotate(-30deg); }
+  to { transform: translate(-50px, 75px) rotate(25deg); }
+}
+
+@keyframes emoji-move-right {
+  from { transform: rotateY(180deg) rotate(-30deg); }
+  to { transform: translate(50px, 75px) rotateY(180deg) rotate(25deg); }
+}
+
+@keyframes App-title-slide {
+  to { font-size: 0em; opacity: 0; heigth: 0px; margin-top: 0px; }
+}
+
+@keyframes App-logo-light {
+  from { filter: brightness(100%) drop-shadow(0px -10px 0.5px transparent);}
+  to { filter: brightness(100%) drop-shadow(0px -10px 0.1px white); transform: translateY(30px); }
+}
+
+@keyframes Nav-fade-in {
+  to { opacity: 1; }
+}
+
+.header-wrapper {
+  position: relative;
+  font-size: 32px;
+}
+
+header {
+  position: relative;
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: #24292e;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  height: 80px;
+  animation: App-logo-light 3s 3s forwards;
+}
+
+.fluid-container {
+  display: flex;
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.nav-container {
+  clear: none;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.page-nav {
+  display: block;
+  box-sizing: border-box;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 5px;
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+.nav-ul {
+  display: flex;
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.nav-a {
+  border-top: 0px;
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 0;
+  color: rgba(255,255,255,0.75);
+  opacity: 0;
+  animation: Nav-fade-in 3s 4s forwards;
+}
+
+.nav-a:hover {
+  color: rgba(255,255,255,1);
+  text-decoration: none !important;
+}
+
+.nav-a:focus, .nav-a:active {
+  color: rgba(255,255,255,1);
+  text-decoration: none !important;
+}
+
+.nav-li {
+  margin: 10px;
+  box-sizing: border-box;
+}
