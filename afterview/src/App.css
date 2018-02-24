@@ -138,6 +138,7 @@ header {
   padding-bottom: 0;
   color: rgba(255,255,255,0.75);
   opacity: 0;
+  text-decoration: none;
   animation: Nav-fade-in 3s 4s forwards;
 }
 
@@ -154,4 +155,18 @@ header {
 .nav-li {
   margin: 10px;
   box-sizing: border-box;
+}
+
+.filters {
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
 }
