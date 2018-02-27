@@ -7,12 +7,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import logo from './mountain-15-48-260771.png';
-import PastTripsList from './PastTripsList';
+import PastTrips from './PastTrips';
 import './App.css';
 
-// Class definition
 class App extends Component {
-  // render
   render() {
     return (
       <BrowserRouter>
@@ -44,7 +42,7 @@ class App extends Component {
               </div>
             </div>
           </header>
-          <Route path="/pasttrips" component={PastTripsList}/>
+          <Route path="/pasttrips" component={PastTrips}/>
         </div>
       </BrowserRouter>
     );

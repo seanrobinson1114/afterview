@@ -7,14 +7,21 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// Class definition
 class TripFilter extends Component {
-  // render
   render() {
     return (
-      <div className="filter">
-        <span> {this.props.title} </span>
-        <div> <input size="5"/> </div>
+      <div>
+        <div className="filter">
+          <span> {this.props.title} </span>
+          <div>
+            <select>
+              {this.props.values.map((value, i) => <option value={value}> {value} </option>)}
+            </select>
+          </div>
+        </div>
+        <datalist id="choices">
+          {this.props.values.map((value, i) => <option value={value}/>)}
+        </datalist>
       </div>
     );
   }
