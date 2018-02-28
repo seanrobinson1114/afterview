@@ -19,10 +19,10 @@ class App extends Component {
             <div className="App">
               <img src={logo} className="logo" alt="logo" />
               <div className="App-title"> Welcome! </div>
-              <div className="emoji_left"> &#9975; </div>
-              <div className="tent_emoji_left"> &#9978; </div>
-              <div className="emoji_right"> &#9975; </div>
-              <div className="tent_emoji_right"> &#9978; </div>
+              <div className="emoji_left"> <span role="img" aria-label="tent"> &#9975; </span> </div>
+              <div className="tent_emoji_left"> <span role="img" aria-label="tent"> &#9978; </span> </div>
+              <div className="emoji_right"> <span role="img" aria-label="tent"> &#9975; </span> </div>
+              <div className="tent_emoji_right"> <span role="img" aria-label="tent"> &#9978; </span> </div>
             </div>
             <div className="fluid-container">
               <div className="nav-container">

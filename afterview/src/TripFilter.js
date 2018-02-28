@@ -15,12 +15,12 @@ class TripFilter extends Component {
           <span> {this.props.title} </span>
           <div>
             <select>
-              {this.props.values.map((value, i) => <option value={value}> {value} </option>)}
+              {this.props.values.map((value, i) => <option value={value} key={i}> {value} </option>)}
             </select>
           </div>
         </div>
         <datalist id="choices">
-          {this.props.values.map((value, i) => <option value={value}/>)}
+          {this.props.values.map((value, i) => <option value={value} key={i}/>)}
         </datalist>
       </div>
     );

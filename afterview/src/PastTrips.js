@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import TripFilter from './TripFilter';
 import TripList from './TripList';
 
+import RequestHandler from './RequestHandler';
+
 class PastTrips extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +18,20 @@ class PastTrips extends Component {
     this.types = ['type1', 'type2' ];
     this.states = ['state1', 'state2'];
     this.countries = ['country1', 'country2'];
+  }
 
-    // Trip list
-    this.trips = ['trip1', 'trip2', 'trip3', 'trip4', 'trip5', 'trip6', 'trip7', 'trip8', 'trip9', 'trip10'];
+  componentDidMount() {
+    // Create new request handler for getting all trip names and send request
+    let req_handler = new RequestHandler( "GET", "https://afterview-190318.appspot.com/trips/getAllTripNames/" );
+    const self = this;
+    if( !this.state ) {
+      if( !window.localStorage.getItem( 'trip_names' ) ) {
+        req_handler.getData().then( res => { self.setState( {trips: JSON.parse( res ) } ); localStorage.setItem( 'trip_names', res ); } );
+      }
+      else {
+        self.setState( { trips: JSON.parse( localStorage.getItem( 'trip_names' ) ) } );
+      }
+    }
   }
 
   render() {
@@ -30,7 +43,9 @@ class PastTrips extends Component {
           <TripFilter title="Type" values={this.types}/>
         </div>
         <div>
-          <TripList trips={this.trips}/>
+        { this.state && this.state.trips &&
+            <TripList trips={this.state.trips}/>
+        }
         </div>
       </div>
     );
