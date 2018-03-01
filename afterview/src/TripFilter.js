@@ -19,9 +19,6 @@ class TripFilter extends Component {
             </select>
           </div>
         </div>
-        <datalist id="choices">
-          {this.props.values.map((value, i) => <option value={value} key={i}/>)}
-        </datalist>
       </div>
     );
   }

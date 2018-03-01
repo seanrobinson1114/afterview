@@ -25,8 +25,11 @@ function makeRequestSetState( kenum ) {
     if( !self.cache_manager.getValue( kenum ) ) {
       new GETRequestHandler().getData( kenum_value.url ).then( data => {
         self.setState( {[kenum_value.key]: data} );
-        // TODO decide what to do if cache is not successful: don't update state?
-        self.cache_manager.updateKey( kenum, data );
+
+        if( !data.includes(GETRequestHandler.FAILURE_STRING) ) {
+          // TODO decide what to do if cache is not successful: don't update state?
+          self.cache_manager.updateKey( kenum, data );
+        }
       });
     }
     else {
@@ -45,8 +48,6 @@ class PastTrips extends Component {
 
   // Invoked immediately after component is mounted
   componentDidMount() {
-    const self = this;
-
     // Bind the makeRequestSetState function to the current scope
     var makeRequestSetStateBound = makeRequestSetState.bind( this );
 
@@ -57,7 +58,6 @@ class PastTrips extends Component {
   }
 
   render() {
-    console.log( 'state', this.state );
     return (
       <div>
         <div className="filters">
