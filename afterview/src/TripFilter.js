@@ -1,6 +1,7 @@
 /*
  * Class describing component for a trip filter
  * author@ Sean
+ * TODO find way to filter the displayed trip names using the chosen <select> value
  */
 
 // Imports
