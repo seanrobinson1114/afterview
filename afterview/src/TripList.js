@@ -7,10 +7,15 @@
 import React, { Component } from 'react';
 
 class TripList extends Component {
+  constructor( props ) {
+    super( props );
+  }
+
   render() {
+    console.log( 'TRIP LIST', this.props );
     return (
       <div>
-        {this.props.trips.map((trip, i) => <button key={i}> {trip} </button>)}
+      {this.props.trips.map((trip, i) => <div><button key={i}> {trip} </button></div>)}
       </div>
     );
   }

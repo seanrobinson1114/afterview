@@ -1,5 +1,5 @@
 /*
- * Class that handles making ajax requests to api
+ * Base class for making ajax requests to api
  * author@ sean
  */
 

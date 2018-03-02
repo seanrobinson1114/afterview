@@ -29,7 +29,7 @@ function attachDataLoadedListener( request, resolve ) {
     resolve( request.responseText );
   }
 }
-console.log( 'request rejected' )
+
 // Attaches listener for onerror (error occured) event
 function attachErrorOccuredListener( request, reject ) {
   request.onerror = () => {
@@ -43,6 +43,7 @@ class GETRequestHandler extends RequestHandler {
     super();
     this.type = 'GET';
   }
+  
   // Send the request
   async getData( url ) {
     let response;

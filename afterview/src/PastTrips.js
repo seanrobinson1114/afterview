@@ -26,7 +26,7 @@ function makeRequestSetState( kenum ) {
       new GETRequestHandler().getData( kenum_value.url ).then( data => {
         self.setState( {[kenum_value.key]: data} );
 
-        if( !data.includes(GETRequestHandler.FAILURE_STRING) ) {
+        if( !data.includes( GETRequestHandler.FAILURE_STRING ) ) {
           // TODO decide what to do if cache is not successful: don't update state?
           self.cache_manager.updateKey( kenum, data );
         }
@@ -39,17 +39,26 @@ function makeRequestSetState( kenum ) {
 }
 
 class PastTrips extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
 
     // Creat ajax GET and cache handlers
     this.cache_manager = new CacheManager();
+
+    // Bind functions to the scope to access using 'this' keyword
+    this.notifyFilterChange = this.notifyFilterChange.bind( this );
+  }
+
+  // Updates state with new filter value to trigger change in child components
+  notifyFilterChange( filter, value ) {
+    let key = filter + '_filter';
+    this.setState( {[key]: value} );
   }
 
   // Invoked immediately after component is mounted
   componentDidMount() {
     // Bind the makeRequestSetState function to the current scope
-    var makeRequestSetStateBound = makeRequestSetState.bind( this );
+    let makeRequestSetStateBound = makeRequestSetState.bind( this );
 
     // Loop through every available key
     for( let kenum in CacheManager.KENUMS ) {
@@ -62,19 +71,22 @@ class PastTrips extends Component {
       <div>
         <div className="filters">
           { this.state && this.state.trip_types &&
-              <TripFilter title="Type" values={this.state.trip_types}/>
+              <TripFilter title="Type" values={this.state.trip_types} filterChange={this.notifyFilterChange}/>
           }
           { this.state && this.state.trip_states &&
-              <TripFilter title="State" values={this.state.trip_states}/>
+              <TripFilter title="State" values={this.state.trip_states} filterChange={this.notifyFilterChange}/>
           }
           { this.state && this.state.trip_countries &&
-              <TripFilter title="Country" values={this.state.trip_countries}/>
+              <TripFilter title="Country" values={this.state.trip_countries} filterChange={this.notifyFilterChange}/>
           }
         </div>
         <div>
-        { this.state && this.state.trip_names &&
-            <TripList trips={this.state.trip_names}/>
-        }
+          { this.state && this.state.trip_names &&
+              <TripList trips={this.state.trip_names}
+                        typeFilter={this.state.type_filter}
+                        stateFilter={this.state.state_filter}
+                        countryFilter={this.state.country_filter}/>
+          }
         </div>
       </div>
     );
