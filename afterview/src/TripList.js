@@ -9,13 +9,23 @@ import React, { Component } from 'react';
 class TripList extends Component {
   constructor( props ) {
     super( props );
+
+    this.state = {filtered_trips: this.props.trips};
+  }
+
+  // Invoked before mounted component receives new props
+  // TODO possibly move to shouldComponentUpdate -> new filter may result in exact same list of trips?
+  componentWillReceiveProps( new_props ) {
+    console.log( 'new props', new_props );
+
+    // TODO perform filter and set state
+    // this.setState( {filtered_trips: } );
   }
 
   render() {
-    console.log( 'TRIP LIST', this.props );
     return (
       <div>
-      {this.props.trips.map((trip, i) => <div><button key={i}> {trip} </button></div>)}
+        {this.state.filtered_trips.map((trip, i) => <button key={i}> {trip} </button>)}
       </div>
     );
   }
