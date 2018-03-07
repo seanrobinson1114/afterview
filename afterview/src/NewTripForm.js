@@ -5,8 +5,9 @@
 
 // Imports
 import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -17,34 +18,40 @@ class NewTripForm extends Component {
         this.state = {
             start_date: moment(),
             end_date: moment().add(1, 'weeks'),
-            destinations: "WI",
+            destination_country: 'United States',
+            destination_regions: '',
             activity_type: "hiking"
         };
 
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleCountryChange = this.handleCountryChange.bind(this);
+        this.handleRegionChange = this.handleRegionChange.bind(this);
     };
 
     handleStartDateChange(date) {
         this.setState({
-            start_date: date
+            start_date: date,
+            end_date: date > this.state.end_date ? date : this.state.end_date
         });
     }
 
     handleEndDateChange(date) {
         this.setState({
+            start_date: date < this.state.start_date ? date : this.state.start_date,
             end_date: date
         });
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
+    handleCountryChange(country) {
         this.setState({
-            [name]: value
+            destination_country: country
+        });
+    }
+
+    handleRegionChange(region) {
+        this.setState({
+            destination_regions: region
         });
     }
     
@@ -70,6 +77,21 @@ class NewTripForm extends Component {
                     endDate={this.state.end_date}
                     onChange={this.handleEndDateChange}/>
               </label>
+              <br />
+              <label>
+                Destination Country:
+                  <CountryDropdown
+                    value={this.state.destination_country}
+                    onChange={this.handleCountryChange}/>
+              </label>
+              <br />
+              <label>
+                Destination Region:
+                  <RegionDropdown
+                    country={this.state.destination_country}
+                    value={this.state.destination_regions}
+                    onChange={this.handleRegionChange}/>
+              </label>  
             </form>
         );
     }
