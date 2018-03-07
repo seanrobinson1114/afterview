@@ -27,6 +27,7 @@ class NewTripForm extends Component {
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleCountryChange = this.handleCountryChange.bind(this);
         this.handleRegionChange = this.handleRegionChange.bind(this);
+        this.handleActivityChange = this.handleActivityChange.bind(this);
     };
 
     handleStartDateChange(date) {
@@ -52,6 +53,12 @@ class NewTripForm extends Component {
     handleRegionChange(region) {
         this.setState({
             destination_regions: region
+        });
+    }
+
+    handleActivityChange(activity) {
+        this.setState({
+            activity_type: activity
         });
     }
     
@@ -91,7 +98,17 @@ class NewTripForm extends Component {
                     country={this.state.destination_country}
                     value={this.state.destination_regions}
                     onChange={this.handleRegionChange}/>
-              </label>  
+              </label>
+              <br />
+              <label>
+                Activity:
+                  <select
+                    value={this.state.activity_type}
+                    onChange={this.handleActivityChange}>
+                    <option value="mountaineering">Mountaineering</option>
+                    <option value="hiking">Hiking</option>
+                  </select>
+              </label>
             </form>
         );
     }
