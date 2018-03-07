@@ -6,10 +6,11 @@
 
 // Create list of acceptable keys and freeze it (make elements immutable)
 let key_enums = {
-  TRIP_NAMES: {key: 'trip_names', url: 'https://afterview-190318.appspot.com/trips/getAllTripNames/'},
-  TRIP_TYPES: {key: 'trip_types', url: 'https://afterview-190318.appspot.com/trips/getUniqueTypes/'},
-  TRIP_STATES: {key: 'trip_states', url: 'https://afterview-190318.appspot.com/trips/getUniqueStates/'},
-  TRIP_COUNTRIES: {key: 'trip_countries', url: 'https://afterview-190318.appspot.com/trips/getUniqueCountries/'}
+  TRIP_NAMES: {key: 'trip_names', url: 'http://localhost:8080/trips/getAllTripNames'},
+  TRIP_TYPES: {key: 'trip_types', url: 'http://localhost:8080/trips/getUniqueTypes/'},
+  TRIP_STATES: {key: 'trip_states', url: 'http://localhost:8080/trips/getUniqueStates/'},
+  TRIP_COUNTRIES: {key: 'trip_countries', url: 'http://localhost:8080/trips/getUniqueCountries/'},
+  TRIP_NAME_TYPE_STATE_COUNTRY: {key: 'trip_name_state_type_country', url: 'http://localhost:8080/trips/getAllNameTypeStateCountry'}
 };
 Object.freeze( key_enums );
 

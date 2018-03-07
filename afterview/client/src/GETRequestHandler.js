@@ -43,7 +43,7 @@ class GETRequestHandler extends RequestHandler {
     super();
     this.type = 'GET';
   }
-  
+
   // Send the request
   async getData( url ) {
     let response;
@@ -55,7 +55,7 @@ class GETRequestHandler extends RequestHandler {
     } catch( e ) {
       console.log( 'GET request ERROR: ', e );
     }
-    return ( response ? JSON.parse( response ) : [RequestHandler.FAILURE_STRING] );
+    return ( response ? JSON.parse( response ) : RequestHandler.FAILURE_STRING );
   }
 }
 

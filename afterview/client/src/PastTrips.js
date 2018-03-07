@@ -24,11 +24,12 @@ function makeRequestSetState( kenum ) {
     // Send request for getting all trip names
     if( !self.cache_manager.getValue( kenum ) ) {
       new GETRequestHandler().getData( kenum_value.url ).then( data => {
-        self.setState( {[kenum_value.key]: data} );
-
-        if( !data.includes( GETRequestHandler.FAILURE_STRING ) ) {
-          // TODO decide what to do if cache is not successful: don't update state?
+        if( data !== GETRequestHandler.FAILURE_STRING ) {
+          self.setState( {[kenum_value.key]: data} );
           self.cache_manager.updateKey( kenum, data );
+        }
+        else {
+          self.setState( {[kenum_value.key]: [data]} );
         }
       });
     }
