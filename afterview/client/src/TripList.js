@@ -16,6 +16,12 @@ class TripList extends Component {
 
     // Bind functions to 'this' scope
     this.filterTrips = this.filterTrips.bind( this );
+    this.selectionHandler = this.selectionHandler.bind( this );
+  }
+
+  // Calls parent component function when trip selection is made
+  selectionHandler( trip_name ) {
+    this.props.tripSelection( trip_name );
   }
 
   // Performs filter on trip list and sets the state
@@ -46,10 +52,7 @@ class TripList extends Component {
   render() {
     return (
       <div>
-        {this.state.filtered_trips.map((trip, i) => <button key={i}> {trip} </button>)}
-        <div> type: {this.state.type_filter} </div>
-        <div> state: {this.state.state_filter} </div>
-        <div> country: {this.state.country_filter} </div>
+        {this.state.filtered_trips.map((trip, i) => <button key={i} onClick={() => this.selectionHandler(trip)}> {trip} </button>)}
       </div>
     );
   }

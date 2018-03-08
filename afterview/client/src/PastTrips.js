@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import TripFilter from './TripFilter';
 import TripList from './TripList';
+import ImageGallery from './ImageGallery';
 import GETRequestHandler from './GETRequestHandler';
 import CacheManager from './CacheManager';
 
@@ -48,12 +49,18 @@ class PastTrips extends Component {
 
     // Bind functions to the scope to access using 'this' keyword
     this.notifyFilterChange = this.notifyFilterChange.bind( this );
+    this.notifyTripSelection = this.notifyTripSelection.bind( this );
   }
 
   // Updates state with new filter value to trigger change in child components
   notifyFilterChange( filter, value ) {
     let key = filter + '_filter';
     this.setState( {[key]: value} );
+  }
+
+  // Updates state with selected trip to trigger change in child components
+  notifyTripSelection( trip_name ) {
+    this.setState( {selected_trip: trip_name} );
   }
 
   // Invoked immediately after component is mounted
@@ -86,7 +93,13 @@ class PastTrips extends Component {
               <TripList trips={this.state.trip_names}
                         typeFilter={this.state.type_filter}
                         stateFilter={this.state.state_filter}
-                        countryFilter={this.state.country_filter}/>
+                        countryFilter={this.state.country_filter}
+                        tripSelection={this.notifyTripSelection}/>
+          }
+        </div>
+        <div>
+          { this.state && this.state.selected_trip &&
+              <ImageGallery tripName={this.state.selected_trip}/>
           }
         </div>
       </div>
