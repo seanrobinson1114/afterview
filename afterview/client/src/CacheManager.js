@@ -10,7 +10,7 @@ let key_enums = {
   TRIP_TYPES: {key: 'trip_types', url: 'http://localhost:8080/trips/getUniqueTypes/'},
   TRIP_STATES: {key: 'trip_states', url: 'http://localhost:8080/trips/getUniqueStates/'},
   TRIP_COUNTRIES: {key: 'trip_countries', url: 'http://localhost:8080/trips/getUniqueCountries/'},
-  TRIP_NAME_TYPE_STATE_COUNTRY: {key: 'trip_name_state_type_country', url: 'http://localhost:8080/trips/getAllNameTypeStateCountry'}
+  TRIP_NAME_TYPE_STATE_COUNTRY: {key: 'trip_name_type_state_country', url: 'http://localhost:8080/trips/getAllNameTypeStateCountry'}
 };
 Object.freeze( key_enums );
 
@@ -19,7 +19,7 @@ class CacheManager {
     this.storage_available = window.localStorage;
   }
 
-  // Returns available self
+  // Returns all kenums
   static get KENUMS() {
     return key_enums;
   }

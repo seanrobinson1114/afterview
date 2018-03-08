@@ -5,27 +5,51 @@
 
 // Imports
 import React, { Component } from 'react';
+import CacheManager from './CacheManager';
 
 class TripList extends Component {
   constructor( props ) {
     super( props );
 
+    this.cache_manager = new CacheManager();
     this.state = {filtered_trips: this.props.trips};
+
+    // Bind functions to 'this' scope
+    this.filterTrips = this.filterTrips.bind( this );
+  }
+
+  // Performs filter on trip list and sets the state
+  filterTrips( type = 'All', state = 'All', country = 'All') {
+    let trip_ntsc = this.cache_manager.getValue( "TRIP_NAME_TYPE_STATE_COUNTRY" );
+    let display_trips = [];
+
+    for( let trip_name of this.props.trips ) {
+      if( ( trip_ntsc[trip_name].type === type || type === 'All' ) &&
+          ( trip_ntsc[trip_name].state === state || state === 'All' ) &&
+          ( trip_ntsc[trip_name].country === country || country === 'All' ) ) {
+            display_trips.push( trip_name );
+      }
+    }
+
+    // Set the state
+    this.setState( {filtered_trips: display_trips} );
   }
 
   // Invoked before mounted component receives new props
-  // TODO possibly move to shouldComponentUpdate -> new filter may result in exact same list of trips?
   componentWillReceiveProps( new_props ) {
-    console.log( 'new props', new_props );
-
-    // TODO perform filter and set state
-    // this.setState( {filtered_trips: } );
+    // Filter the trip list
+    this.filterTrips( new_props.typeFilter,
+                      new_props.stateFilter,
+                      new_props.countryFilter );
   }
 
   render() {
     return (
       <div>
         {this.state.filtered_trips.map((trip, i) => <button key={i}> {trip} </button>)}
+        <div> type: {this.state.type_filter} </div>
+        <div> state: {this.state.state_filter} </div>
+        <div> country: {this.state.country_filter} </div>
       </div>
     );
   }

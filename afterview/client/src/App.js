@@ -1,4 +1,4 @@
-/*asdfasdfsadfsadfasdffdsa
+/*
  * Class describing component for header and high level navigation
  * author@ sean
  */
