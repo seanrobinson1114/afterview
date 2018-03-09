@@ -23,11 +23,11 @@ function makeRequestSetState( kenum ) {
 
   if( !self.state ) {
     // Send request for getting all trip names
-    if( !self.cache_manager.getValue( kenum ) ) {
+    if( !self.cache_manager.getStaticValue( kenum ) ) {
       new GETRequestHandler().getData( kenum_value.url ).then( data => {
         if( data !== GETRequestHandler.FAILURE_STRING ) {
           self.setState( {[kenum_value.key]: data} );
-          self.cache_manager.updateKey( kenum, data );
+          self.cache_manager.updateStaticKey( kenum, data );
         }
         else {
           self.setState( {[kenum_value.key]: [data]} );
@@ -35,7 +35,7 @@ function makeRequestSetState( kenum ) {
       });
     }
     else {
-      self.setState( {[kenum_value.key]: self.cache_manager.getValue( kenum ) } );
+      self.setState( {[kenum_value.key]: self.cache_manager.getStaticValue( kenum ) } );
     }
   }
 }
@@ -44,7 +44,7 @@ class PastTrips extends Component {
   constructor( props ) {
     super( props );
 
-    // Creat ajax GET and cache handlers
+    // Creat cache handler
     this.cache_manager = new CacheManager();
 
     // Bind functions to the scope to access using 'this' keyword

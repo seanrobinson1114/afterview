@@ -37,7 +37,7 @@ module.exports = {
   // Returns all pictures for specified trip
   listAllPicturesFromTrip: ( request, response_ini ) => {
     let images = [],
-        image_url = 'https://content.googleapi.com/storage/v1/b/afterview-image/o?prefix=images/' + request.params.tripName;
+        image_url = 'https://content.googleapis.com/storage/v1/b/afterview-image/o?prefix=images/' + request.params.tripName;
 
     https.get( image_url, ( response ) => {
       let image_names = [],

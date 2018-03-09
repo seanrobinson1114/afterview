@@ -26,7 +26,7 @@ class TripList extends Component {
 
   // Performs filter on trip list and sets the state
   filterTrips( type = 'All', state = 'All', country = 'All') {
-    let trip_ntsc = this.cache_manager.getValue( "TRIP_NAME_TYPE_STATE_COUNTRY" );
+    let trip_ntsc = this.cache_manager.getStaticValue( "TRIP_NAME_TYPE_STATE_COUNTRY" );
     let display_trips = [];
 
     for( let trip_name of this.props.trips ) {
