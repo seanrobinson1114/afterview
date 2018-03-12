@@ -13,7 +13,7 @@ class TripFilter extends Component {
 
     // Bind function to 'this' scope so it can be used in render function
     this.selectionHandler = this.selectionHandler.bind( this );
-    this.props.values.push( 'All' );
+    !this.props.values.includes( 'All' ) ? this.props.values.push( 'All' ) : null;
   }
 
   // Calls parent component function when dropdown selection is made

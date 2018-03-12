@@ -60,7 +60,24 @@ class PastTrips extends Component {
 
   // Updates state with selected trip to trigger change in child components
   notifyTripSelection( trip_name ) {
-    this.setState( {selected_trip: trip_name} );
+    let self = this;
+
+    if( !self.cache_manager.getValue( trip_name + '_image_names' ) ) {
+      new GETRequestHandler().getData( 'http://localhost:8080/trips/getImagesForTrip/' + trip_name ).then( data => {
+        if( data !== GETRequestHandler.FAILURE_STRING ) {
+          self.setState( {selected_trip: trip_name, image_names: data} );
+          self.cache_manager.updateKey( trip_name + '_image_names', data );
+          console.log( 'image_names\n', data );
+        }
+        else {
+          self.setState( {selected_trip: trip_name, image_names: [data]} );
+        }
+      });
+    }
+    else {
+      let temp = self.cache_manager.getValue( trip_name + '_image_names' );
+      this.setState( {selected_trip: trip_name, image_names: temp} );
+    }
   }
 
   // Invoked immediately after component is mounted
@@ -89,17 +106,18 @@ class PastTrips extends Component {
           }
         </div>
         <div>
-          { this.state && this.state.trip_names &&
+          { this.state && this.state.trip_names && this.state.trip_name_type_state_country &&
               <TripList trips={this.state.trip_names}
                         typeFilter={this.state.type_filter}
                         stateFilter={this.state.state_filter}
                         countryFilter={this.state.country_filter}
-                        tripSelection={this.notifyTripSelection}/>
+                        tripSelection={this.notifyTripSelection}
+                        filterObj={this.state.trip_name_type_state_country}/>
           }
         </div>
         <div>
-          { this.state && this.state.selected_trip &&
-              <ImageGallery tripName={this.state.selected_trip}/>
+          { this.state && this.state.selected_trip && this.state.image_names &&
+              <ImageGallery tripName={this.state.selected_trip} imageNames={this.state.image_names}/>
           }
         </div>
       </div>
