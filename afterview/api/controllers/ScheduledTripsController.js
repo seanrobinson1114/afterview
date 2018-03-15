@@ -4,8 +4,8 @@
  */
 
 const mongoose = require( 'mongoose' ),
-      ScheduledTrip = mongoose.model( 'ScheduledTrips' ),
-      fs = require( 'fs' );
+  ScheduledTrip = mongoose.model( 'ScheduledTrips' ),
+  fs = require( 'fs' );
 
 // Define object that will be exported
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
       if( error )
         response.send( error );
 
-        response.json( total );
+      response.json( total );
     });
   },
   // Returns the duration of requested trip
@@ -33,7 +33,7 @@ module.exports = {
       if( error )
         response.send( error );
 
-        response.json( duration[0].get( 'duration' ) );
+      response.json( duration[0].get( 'duration' ) );
     });
   },
   // Returns the number of people on requested trip
@@ -42,7 +42,23 @@ module.exports = {
       if( error )
         response.send( error );
 
-        response.json( people[0].get( 'people' ) );
+      response.json( people[0].get( 'people' ) );
+    });
+  },
+  // Insert new Scheduled Trip
+  addTrip: ( request, response ) => {
+    let new_trip = {name: req.body.name,
+                start_date: req.body.start_date,
+                end_date: req.body.end_date,
+                country: req.body.country,
+                region: req.body.region,
+                type: req.body.type};
+
+    ScheduledTrip.create( new_trip, ( error ) => {
+      if( error )
+        response.send( error );
+
+        response.send( 'success' );
     });
   }
 };

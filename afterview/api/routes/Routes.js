@@ -214,4 +214,8 @@ module.exports = function( app )
   // Get the people going on specified trips
   app.route( '/schdtrips/getPeople/:tripName' )
     .get( ScheduledTrips.getPeople );
+
+  // Add new trip to ScheduledTrips
+  app.route( '/schdtrips/addTrip' )
+    .post( ScheduledTrips.addTrip );
 };
