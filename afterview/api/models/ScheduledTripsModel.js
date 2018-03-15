@@ -13,14 +13,26 @@ module.exports = mongoose.model( 'ScheduledTrips',
       type: String,
       required: 'Name of trip',
     },
-    departure_date: {
+    start_date: {
       type: String,
       required: 'Departure date',
       uppercase: true
     },
-    return_date: {
+    end_date: {
       type: String,
       required: 'Return date'
+    },
+    country: {
+      type: String,
+      required: 'Destination country'
+    },
+    region: {
+      type: String,
+      required: 'Destination region'
+    },
+    type: {
+      type: String,
+      required: 'Activity type'
     }
   },
   // Specify existing collection to use
