@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import CacheManager from './CacheManager';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -16,19 +17,28 @@ class NewTripForm extends Component {
         super(props);
         
         this.state = {
+            trip_name: '',
             start_date: moment(),
             end_date: moment().add(1, 'weeks'),
             destination_country: 'United States',
-            destination_regions: '',
+            destination_region: '',
             activity_type: "hiking"
         };
 
+        this.handleTripNameChange = this.handleTripNameChange.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleCountryChange = this.handleCountryChange.bind(this);
         this.handleRegionChange = this.handleRegionChange.bind(this);
         this.handleActivityChange = this.handleActivityChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
+
+    handleTripNameChange(event) {
+        this.setState({
+            trip_name: event.target.value
+        });
+    }
 
     handleStartDateChange(date) {
         this.setState({
@@ -52,19 +62,32 @@ class NewTripForm extends Component {
 
     handleRegionChange(region) {
         this.setState({
-            destination_regions: region
+            destination_region: region
         });
     }
 
-    handleActivityChange(activity) {
+    handleActivityChange(event) {
         this.setState({
-            activity_type: activity
+            activity_type: event.target.value
         });
+    }
+
+    handleSubmit(event) {
+        alert('Your trip called ' + this.state.trip_name + ' was submitted: ' + this.state.activity_type + ' in ' + this.state.destination_region + ', ' + this.state.destination_country + ' (' + this.state.start_date.format("MMM Do YYYY") + " - " + this.state.end_date.format("MMM Do YYYY") + ')');
+        event.preventDefault();
     }
     
     render() {
         return (
-          <form>
+          <form onSubmit={this.handleSubmit}>
+             <label>
+                Trip Name:
+                <input
+                   type="text"
+                   name={this.state.trip_name}
+                   onChange={this.handleTripNameChange}/>
+             </label>
+             <br />   
              <label>
                 Trip Dates:
                   <DatePicker
@@ -96,7 +119,7 @@ class NewTripForm extends Component {
                 Destination Region:
                   <RegionDropdown
                     country={this.state.destination_country}
-                    value={this.state.destination_regions}
+                    value={this.state.destination_region}
                     onChange={this.handleRegionChange}/>
               </label>
               <br />
@@ -109,6 +132,8 @@ class NewTripForm extends Component {
                     <option value="hiking">Hiking</option>
                   </select>
               </label>
+              <br />
+              <input type="submit" value="Submit"/>  
             </form>
         );
     }
