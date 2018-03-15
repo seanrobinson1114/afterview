@@ -2,3 +2,4 @@ server.js
 public/images/*
 node_modules/*
 public/js/node_modules/*
+*~
