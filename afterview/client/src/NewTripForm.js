@@ -17,12 +17,12 @@ class NewTripForm extends Component {
         super(props);
         
         this.state = {
-            trip_name: '',
+            name: '',
             start_date: moment(),
             end_date: moment().add(1, 'weeks'),
-            destination_country: 'United States',
-            destination_region: '',
-            activity_type: "hiking"
+            country: 'United States',
+            region: '',
+            type: "hiking"
         };
 
         this.handleTripNameChange = this.handleTripNameChange.bind(this);
@@ -36,7 +36,7 @@ class NewTripForm extends Component {
 
     handleTripNameChange(event) {
         this.setState({
-            trip_name: event.target.value
+            name: event.target.value
         });
     }
 
@@ -56,24 +56,31 @@ class NewTripForm extends Component {
 
     handleCountryChange(country) {
         this.setState({
-            destination_country: country
+            country: country
         });
     }
 
     handleRegionChange(region) {
         this.setState({
-            destination_region: region
+            region: region
         });
     }
 
     handleActivityChange(event) {
         this.setState({
-            activity_type: event.target.value
+            type: event.target.value
         });
     }
 
     handleSubmit(event) {
-        alert('Your trip called ' + this.state.trip_name + ' was submitted: ' + this.state.activity_type + ' in ' + this.state.destination_region + ', ' + this.state.destination_country + ' (' + this.state.start_date.format("MMM Do YYYY") + " - " + this.state.end_date.format("MMM Do YYYY") + ')');
+        //alert('Your trip called ' + this.state.name + ' was submitted: ' + this.state.type + ' in ' + this.state.region + ', ' + this.state.country + ' (' + this.state.start_date.format("MMM Do YYYY") + " - " + this.state.end_date.format("MMM Do YYYY") + ')');
+        let xhr = new XMLHttpRequest();
+        xhr.open( 'POST', 'http://localhost:8080/schdtrips/addTrip', true );
+        xhr.onload = () => {
+            console.log( 'all data finished posting' );
+        }
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send( JSON.stringify(this.state) );
         event.preventDefault();
     }
     
@@ -84,7 +91,7 @@ class NewTripForm extends Component {
                 Trip Name:
                 <input
                    type="text"
-                   name={this.state.trip_name}
+                   name={this.state.name}
                    onChange={this.handleTripNameChange}/>
              </label>
              <br />   
@@ -111,22 +118,22 @@ class NewTripForm extends Component {
               <label>
                 Destination Country:
                   <CountryDropdown
-                    value={this.state.destination_country}
+                    value={this.state.country}
                     onChange={this.handleCountryChange}/>
               </label>
               <br />
               <label>
                 Destination Region:
                   <RegionDropdown
-                    country={this.state.destination_country}
-                    value={this.state.destination_region}
+                    country={this.state.country}
+                    value={this.state.region}
                     onChange={this.handleRegionChange}/>
               </label>
               <br />
               <label>
                 Activity:
                   <select
-                    value={this.state.activity_type}
+                    value={this.state.type}
                     onChange={this.handleActivityChange}>
                     <option value="mountaineering">Mountaineering</option>
                     <option value="hiking">Hiking</option>

@@ -47,12 +47,12 @@ module.exports = {
   },
   // Insert new Scheduled Trip
   addTrip: ( request, response ) => {
-    let new_trip = {name: req.body.name,
-                start_date: req.body.start_date,
-                end_date: req.body.end_date,
-                country: req.body.country,
-                region: req.body.region,
-                type: req.body.type};
+    let new_trip = {name: request.body.name,
+                start_date: request.body.start_date,
+                end_date: request.body.end_date,
+                country: request.body.country,
+                region: request.body.region,
+                type: request.body.type};
 
     ScheduledTrip.create( new_trip, ( error ) => {
       if( error )
