@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import logo from './mountain-15-48-260771.png';
 import PastTrips from './PastTrips';
+import ScheduledTrips from './ScheduledTrips';
 import './App.css';
 
 class App extends Component {
@@ -42,7 +43,8 @@ class App extends Component {
               </div>
             </div>
           </header>
-          <Route path="/pasttrips" component={PastTrips}/>
+            <Route path="/pasttrips" component={PastTrips}/>
+            <Route path="/schdtrips" component={ScheduledTrips}/>
         </div>
       </BrowserRouter>
     );
