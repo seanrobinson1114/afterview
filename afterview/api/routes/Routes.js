@@ -207,13 +207,17 @@ module.exports = function( app )
   app.route( '/schdtrips/getNumberOfTrips' )
     .get( ScheduledTrips.getNumberOfTrips );
 
+    // Get all trip names
+  app.route( '/schdtrips/getAllTripNames' )
+    .get( ScheduledTrips.listAllTripNames );
+
   // Get the duration of the selected trip
   app.route( '/schdtrips/getDuration/:tripName' )
     .get( ScheduledTrips.getDuration );
 
   // Get the people going on specified trips
   app.route( '/schdtrips/getPeople/:tripName' )
-    .get( ScheduledTrips.getPeople );
+        .get( ScheduledTrips.getPeople );
 
   // Add new trip to ScheduledTrips
   app.route( '/schdtrips/addTrip' )

@@ -45,6 +45,15 @@ module.exports = {
       response.json( people[0].get( 'people' ) );
     });
   },
+  // Returns list of all trip names
+  listAllTripNames: ( request, response ) => {
+    ScheduledTrip.find().distinct( 'name', ( error, names ) => {
+      if( error )
+        response.send( error )
+        
+        response.json( names );
+    });
+  },
   // Insert new Scheduled Trip
   addTrip: ( request, response ) => {
     let new_trip = {name: request.body.name,

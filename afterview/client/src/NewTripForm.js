@@ -73,15 +73,18 @@ class NewTripForm extends Component {
     }
 
     handleSubmit(event) {
-        //alert('Your trip called ' + this.state.name + ' was submitted: ' + this.state.type + ' in ' + this.state.region + ', ' + this.state.country + ' (' + this.state.start_date.format("MMM Do YYYY") + " - " + this.state.end_date.format("MMM Do YYYY") + ')');
-        let xhr = new XMLHttpRequest();
-        xhr.open( 'POST', 'http://localhost:8080/schdtrips/addTrip', true );
-        xhr.onload = () => {
-            console.log( 'all data finished posting' );
-        }
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.send( JSON.stringify(this.state) );
-        event.preventDefault();
+      //alert('Your trip called ' + this.state.name + ' was submitted: ' + this.state.type + ' in ' + this.state.region + ', ' + this.state.country + ' (' + this.state.start_date.format("MMM Do YYYY") + " - " + this.state.end_date.format("MMM Do YYYY") + ')');
+      let self = this;
+      
+      let xhr = new XMLHttpRequest();
+      xhr.open( 'POST', 'http://localhost:8080/schdtrips/addTrip', true );
+      xhr.onload = () => {
+        self.props.onSaveSuccess();
+        console.log( 'all data finished posting' );
+      }
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send( JSON.stringify(this.state) );
+      event.preventDefault();
     }
     
     render() {
