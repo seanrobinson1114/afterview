@@ -175,3 +175,11 @@ header {
   display: block;
   height: 75vh;
 }
+
+.ready {
+  display: block;
+}
+
+.loading {
+  display: none;
+}
