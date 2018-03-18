@@ -13,7 +13,6 @@ class TripFilter extends Component {
 
     // Bind function to 'this' scope so it can be used in render function
     this.selectionHandler = this.selectionHandler.bind( this );
-    !this.props.values.includes( 'All' ) ? this.props.values.push( 'All' ) : null;
   }
 
   // Calls parent component function when dropdown selection is made
@@ -28,6 +27,7 @@ class TripFilter extends Component {
           <span> {this.props.title} </span>
           <div>
             <select onChange={this.selectionHandler}>
+              <option value="All"> All </option>
               {this.props.values.map((value, i) => <option value={value} key={i}> {value} </option>)}
             </select>
           </div>

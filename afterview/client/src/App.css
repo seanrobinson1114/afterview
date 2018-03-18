@@ -170,3 +170,16 @@ header {
   display: flex;
   flex-direction: column;
 }
+
+.map {
+  display: block;
+  height: 75vh;
+}
+
+.ready {
+  display: block;
+}
+
+.loading {
+  display: none;
+}
