@@ -10,6 +10,7 @@ import TripList from './TripList';
 import ImageGallery from './ImageGallery';
 import GETRequestHandler from './GETRequestHandler';
 import CacheManager from './CacheManager';
+import GoogleMap from './GoogleMap';
 
 /*
  * Private class function that should not be directly accessible from instances of class
@@ -114,6 +115,11 @@ class PastTrips extends Component {
                         countryFilter={this.state.country_filter}
                         tripSelection={this.notifyTripSelection}
                         filterObj={this.state.trip_name_type_state_country}/>
+          }
+        </div>
+        <div className="map">
+          { this.state && this.state.visited_locations &&
+              <GoogleMap visitedLocations={this.state.visited_locations}/>
           }
         </div>
         <div>

@@ -10,7 +10,8 @@ let key_enums = {
   TRIP_TYPES: {key: 'trip_types', url: 'http://localhost:8080/trips/getUniqueTypes/'},
   TRIP_STATES: {key: 'trip_states', url: 'http://localhost:8080/trips/getUniqueStates/'},
   TRIP_COUNTRIES: {key: 'trip_countries', url: 'http://localhost:8080/trips/getUniqueCountries/'},
-  TRIP_NAME_TYPE_STATE_COUNTRY: {key: 'trip_name_type_state_country', url: 'http://localhost:8080/trips/getAllNameTypeStateCountry'}
+  TRIP_NAME_TYPE_STATE_COUNTRY: {key: 'trip_name_type_state_country', url: 'http://localhost:8080/trips/getAllNameTypeStateCountry'},
+  VISITED_LOCATIONS: {key: 'visited_locations', url: 'http://localhost:8080/vlocations/'}
 };
 Object.freeze( key_enums );
 
