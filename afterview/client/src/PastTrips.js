@@ -55,6 +55,7 @@ class PastTrips extends Component {
   // Updates state with new filter value to trigger change in child components
   notifyFilterChange( filter, value ) {
     let key = filter + '_filter';
+
     this.setState( {[key]: value} );
   }
 
