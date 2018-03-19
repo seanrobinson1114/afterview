@@ -217,7 +217,11 @@ module.exports = function( app )
 
   // Get the people going on specified trips
   app.route( '/schdtrips/getPeople/:tripName' )
-        .get( ScheduledTrips.getPeople );
+    .get( ScheduledTrips.getPeople );
+
+  // Get scheduled trip info
+  app.route( '/schdtrips/getTripDetails/:tripName' )
+    .get( ScheduledTrips.getTripDetails );
 
   // Add new trip to ScheduledTrips
   app.route( '/schdtrips/addTrip' )

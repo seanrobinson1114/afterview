@@ -18,6 +18,19 @@ module.exports = {
       response.json( trip );
     });
   },
+  // Returns all trip data
+  getTripDetails: ( request, response ) => {
+    ScheduledTrip.find( {'name': request.params.tripName}, ( error, trip ) => {
+      if( error ) {
+        console.log( error );
+        response.send( error );
+      }
+
+      // TODO: This query needs to be updated so that you can only ever get
+      //       one value returned.
+      response.json( trip[0] );
+    });
+  },
   // Returns the total number of trips
   getNumberOfTrips: ( request, response ) => {
     ScheduledTrip.find().distinct( 'name' ).count( ( error, total ) => {
@@ -54,6 +67,7 @@ module.exports = {
         response.json( names );
     });
   },
+  
   // Insert new Scheduled Trip
   addTrip: ( request, response ) => {
     let new_trip = {name: request.body.name,

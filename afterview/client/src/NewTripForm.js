@@ -8,8 +8,6 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-import CacheManager from './CacheManager';
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 class NewTripForm extends Component {

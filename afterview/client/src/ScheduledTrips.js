@@ -6,9 +6,8 @@
 // Imports
 import React, { Component } from 'react';
 import NewTripForm from './NewTripForm';
-import TripFilter from './TripFilter';
-import GETRequestHandler from './GETRequestHandler';
 import ScheduledTripsCacheManager from './ScheduledTripsCacheManager';
+import ScheduledTrip from './ScheduledTrip';
 
 class ScheduledTrips extends Component {
   constructor( props ) {
@@ -26,7 +25,7 @@ class ScheduledTrips extends Component {
     let self = this;
     this.cache_manager.loadStaticValues().then( () => {
       self.setState({
-        'trip_names': this.cache_manager.getStaticValue( "TRIP_NAMES" )
+        'trip_names': self.cache_manager.getStaticValue( "TRIP_NAMES" )
       });
     });
   }
@@ -35,7 +34,7 @@ class ScheduledTrips extends Component {
     let self = this;
     this.cache_manager.updateStaticValues().then( () => {
       self.setState({
-        'trip_names': this.cache_manager.getStaticValue( "TRIP_NAMES" )
+        'trip_names': self.cache_manager.getStaticValue( "TRIP_NAMES" )
       });
     });
   }
@@ -43,11 +42,11 @@ class ScheduledTrips extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <div>
         { this.state && this.state.trip_names &&
-          this.state.trip_names.map((trip, i) => <li key={i}> {trip} </li>)
+          this.state.trip_names.map((trip, i) => <ScheduledTrip key={i} name={trip}/>)
         }
-        </ul>
+        </div> 
         <NewTripForm onSaveSuccess={this.updateState}/>
       </div>
     );
