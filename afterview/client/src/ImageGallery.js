@@ -4,6 +4,7 @@
 
 // Imports
 import React, { Component } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 
 class ImageGallery extends Component {
   constructor( props ) {
@@ -12,7 +13,7 @@ class ImageGallery extends Component {
     // this.url = 'http://localhost:8080/trips/getImagesForTrip/';
     this.image_url = 'https://storage.googleapis.com/afterview-image/images/' + props.tripName;
     this.image_count = 0;
-    this.state= {images_ready: false};
+    this.state= {images_ready: false, percent_complete: 0};
 
     // Bind functions
     this.imageLoaded = this.imageLoaded.bind( this );
@@ -23,6 +24,8 @@ class ImageGallery extends Component {
     this.image_count++;
     console.log( 'image loaded ', this.image_count );
     console.log( 'total images ', this.props.imageNames.length );
+    this.setState( {percent_complete: Math.round( ( this.image_count/this.props.imageNames.length)*100 ) }  );
+    console.log( 'percentage: ' + this.state.percent_complete);
 
     // Check if all images are loaded
     if( this.image_count === this.props.imageNames.length )
@@ -36,13 +39,14 @@ class ImageGallery extends Component {
     this.image_url = 'https://storage.googleapis.com/afterview-image/images/' + new_props.tripName;
     this.setState( {images_ready: false} );
     this.image_count = 0;
+    this.setState( {percent_complete: 0} );
   }
 
   render() {
     return (
       <div>
         { !this.state.images_ready &&
-          <div> Loading </div>
+          <ProgressBar bsStyle="success" now={this.state.percent_complete} label={this.state.percent_complete +"%"}/>
         }
         <div className={(this.state.images_ready? 'ready' : 'loading')}>
           <div> {this.props.tripName} </div>
