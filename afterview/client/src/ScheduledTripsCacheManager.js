@@ -26,9 +26,22 @@ function makeRequestAndGetStaticData( sd_enum ) {
   });
 }
 
+function makeRequestAndGetTripData( trip_name ) {
+  return new GETRequestHandler().getData( 'http://localhost:8080/schdtrips/getTripDetails/' + trip_name ).then( data => {
+    if( data !== GETRequestHandler.FAILURE_STRING ) {
+      return data;
+    }
+  });
+}
+
+function createTripNameStorageKey( key_root, trip_name ) {
+  return key_root + "_" + trip_name;
+}
+
 class ScheduledTripsCacheManager {
   constructor() {
     this.storage_available = window.localStorage;
+    this.trip_details_key_root = 'scheduled_trip_details'
   }
 
   // Returns all static data enums
@@ -59,7 +72,7 @@ class ScheduledTripsCacheManager {
           });
         }
         else
-          return new Promise( (resolve, reject ) => { resolve() } );
+          return new Promise( ( resolve, reject ) => { resolve() } );
       }
     }
     else
@@ -84,22 +97,44 @@ class ScheduledTripsCacheManager {
       throw new Error( 'Browser storage unavailable' );
   }
 
-  // Return the current value of a key
-  getValue( key ) {
+  // Load the trip data
+  loadTripData( trip_name ) {
     if( this.storage_available ) {
-      return JSON.parse( localStorage.getItem( key ) );
+      let storage_key =
+          createTripNameStorageKey( this.trip_details_key_root, trip_name );
+    
+      if( !localStorage.getItem( storage_key ) ) {
+        return makeRequestAndGetTripData( trip_name ).then( ( response ) => {
+          localStorage.setItem( storage_key, JSON.stringify( response ) );
+        });
+      }
+      else
+        return new Promise( ( resolve, reject ) => { resolve() } );
     }
-
-    throw new Error( 'Browser storage unavailble!' );
   }
 
-  // Set the value of a key
-  setValue( key, value ) {
+  // Update the trip data
+  updateTripData( trip_name ) {
     if( this.storage_available ) {
-      localStorage.setItem( key, JSON.stringify( value ) )
+      let storage_key =
+          createTripNameStorageKey( this.trip_details_key_root, trip_name );
+      
+      return makeRequestAndGetTripData( trip_name ).then( ( response ) => {
+        localStorage.setItem( storage_key, JSON.stringify( response ) );
+      });
     }
-    else
-      throw new Error( 'Browser storage unavailable!' );
+  }
+
+  // Get the trip data
+  getTripData( trip_name ) {
+    if( this.storage_available ) {
+      let storage_key =
+          createTripNameStorageKey( this.trip_details_key_root, trip_name );
+      console.log( storage_key );
+      return JSON.parse( localStorage.getItem( storage_key ) );
+    }
+
+    throw new Error( 'Browser storage unavailable' );
   }
 }
 
