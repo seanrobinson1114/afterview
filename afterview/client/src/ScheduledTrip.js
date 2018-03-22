@@ -61,7 +61,7 @@ class ScheduledTrip extends Component {
             { this.state && this.state.start_date && this.state.end_date &&
               this.state.display_trip_data &&
               <div> Dates: {moment(this.state.start_date).format("MMM Do YYYY ")}
-              to 
+              to
                            {moment(this.state.end_date).format(" MMM Do YYYY")}
               </div>
             }
@@ -95,7 +95,7 @@ class ScheduledTrip extends Component {
 //         { this.state && this.state.start_date && this.state.end_date &&
 //           this.state.display_trip_data &&
 //           <div> Dates: {moment(this.state.start_date).format("MMM Do YYYY ")}
-//            to 
+//            to
 //                        {moment(this.state.end_date).format(" MMM Do YYYY")}
 //           </div>
 //         }
