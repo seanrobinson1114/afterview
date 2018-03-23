@@ -9,28 +9,97 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import 'react-datepicker/dist/react-datepicker.css';
+import { FormGroup, ControlLabel, FormControl, Button, Form, Col } from 'react-bootstrap';
 
 class NewTripForm extends Component {
   constructor(props) {
     super(props);
+    console.log( 'schdprops', props);
 
     this.state = {
       name: '',
-      start_date: moment(),
-      end_date: moment().add(1, 'weeks'),
       country: 'United States',
       region: '',
-      type: "hiking"
     };
 
-    this.handleTripNameChange = this.handleTripNameChange.bind(this);
-    this.handleStartDateChange = this.handleStartDateChange.bind(this);
-    this.handleEndDateChange = this.handleEndDateChange.bind(this);
-    this.handleCountryChange = this.handleCountryChange.bind(this);
-    this.handleRegionChange = this.handleRegionChange.bind(this);
-    this.handleActivityChange = this.handleActivityChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // Bind functions to scope
+    this.validateStartDate = this.validateStartDate.bind( this );
+    this.validateEndDate = this.validateEndDate.bind( this );
+
+    this.handleTripNameChange = this.handleTripNameChange.bind( this );
+    this.handleStartDateChange = this.handleStartDateChange.bind( this );
+    this.handleEndDateChange = this.handleEndDateChange.bind( this );
+    this.handleCountryChange = this.handleCountryChange.bind( this );
+    this.handleRegionChange = this.handleRegionChange.bind( this );
+    this.handleActivityChange = this.handleActivityChange.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );
   };
+
+  // Validate the start date
+  validateStartDate() {
+    // Check for undefined and check its validity
+    if( this.state.start_date ) {
+      const start_date_string = this.state.start_date.format( 'MM-DD-YYYY' );
+      const current_date_string = moment().format( 'MM-DD-YYYY' );
+
+      if( !this.state.end_date ) {
+        if( start_date_string > current_date_string )
+          return 'success';
+
+        else if( start_date_string < current_date_string )
+          return 'error';
+
+        else if( start_date_string == current_date_string )
+          return 'warning';
+      }
+
+      else {
+        const end_date_string = this.state.end_date.format( 'MM-DD-YYYY' );
+
+        if( (start_date_string > end_date_string) || (start_date_string < current_date_string) )
+          return 'error';
+
+        else if( start_date_string < end_date_string )
+          return 'success';
+
+        else if( (start_date_string == end_date_string) || (start_date_string == current_date_string) )
+          return 'warning';
+      }
+    }
+  }
+
+  // Validate the end date
+  validateEndDate() {
+    // Check for undefined and check validity
+    if( this.state.end_date ) {
+      const end_date_string = this.state.end_date.format( 'MM-DD-YYYY' );
+      const current_date_string = moment().format( 'MM-DD-YYYY' );
+
+      if( !this.state.start_date ) {
+        if( end_date_string > current_date_string )
+          return 'success';
+
+        else if( end_date_string < current_date_string )
+          return 'error';
+
+        else if( end_date_string == current_date_string )
+          return 'warning';
+      }
+
+      else {
+        const start_date_string = this.state.start_date.format( 'MM-DD-YYYY' );
+
+        if( (end_date_string < start_date_string) || (end_date_string < current_date_string) )
+          return 'error';
+
+        else if( end_date_string > start_date_string )
+          return 'success';
+
+        else if( end_date_string == start_date_string )
+          return 'warning';
+      }
+    }
+  }
 
   handleTripNameChange(event) {
     this.setState({
@@ -41,13 +110,11 @@ class NewTripForm extends Component {
   handleStartDateChange(date) {
     this.setState({
       start_date: date,
-      end_date: date > this.state.end_date ? date : this.state.end_date
     });
   }
 
   handleEndDateChange(date) {
     this.setState({
-      start_date: date < this.state.start_date ? date : this.state.start_date,
       end_date: date
     });
   }
@@ -87,58 +154,93 @@ class NewTripForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Trip Name:
-          <input type="text"
-                 name={this.state.name}
-                 onChange={this.handleTripNameChange}/>
-        </label>
-        <br />
-        <label>
-          Trip Dates:
-            <DatePicker selected={this.state.start_date}
-                        selectsStart
-                        startDate={this.state.start_date}
-                        endDate={this.state.end_date}
-                        onChange={this.handleStartDateChange}/>
-         </label>
-         <br />
-         <label>
-           End Date:
-           <DatePicker selected={this.state.end_date}
-                       selectsEnd
-                       startDate={this.state.start_date}
-                       endDate={this.state.end_date}
-                       onChange={this.handleEndDateChange}/>
-         </label>
-         <br />
-         <label>
-           Destination Country:
-           <CountryDropdown value={this.state.country}
-                            onChange={this.handleCountryChange}/>
-         </label>
-         <br />
-         <label>
-           Destination Region:
-           <RegionDropdown country={this.state.country}
-                           value={this.state.region}
-                           onChange={this.handleRegionChange}/>
-         </label>
-         <br />
-         <label>
-           Activity:
-           <select value={this.state.type}
-                   onChange={this.handleActivityChange}>
-             <option value="mountaineering">Mountaineering</option>
-             <option value="hiking">Hiking</option>
-           </select>
-         </label>
-         <br />
-         <input type="submit" value="Submit"/>
-       </form>
-     );
-   }
+      <div className="form">
+        <Form horizontal onSubmit={this.handleSubmit}>
+
+          <FormGroup controlId="tripName" bsSize="large">
+            <Col componentClass={ControlLabel} sm={4}>
+              Trip Name
+            </Col>
+            <Col>
+              <FormControl
+                type="text"
+                value={this.state.name}
+                placeholder="trip name"
+                onChange={this.handleTripNameChange}
+                sm={10}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup
+            controlId="tripStartDate"
+            validationState={this.validateStartDate()}
+          >
+            <Col componentClass={ControlLabel} sm={4}>
+              Start Date
+            </Col>
+            <Col>
+              <FormControl
+                componentClass={DatePicker}
+                placeholderText="start date"
+                selected={this.state.start_date}
+                onChange={this.handleStartDateChange}
+                sm={10}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup
+            controlId="tripEndDate"
+            validationState={this.validateEndDate()}
+          >
+            <Col componentClass={ControlLabel} sm={4}>
+              End Date
+            </Col>
+            <Col>
+              <FormControl
+                componentClass={DatePicker}
+                placeholderText="end date"
+                selected={this.state.end_date}
+                onChange={this.handleEndDateChange}
+                sm={10}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="destinationCountry">
+            <ControlLabel> Destination Country </ControlLabel>
+            <br/>
+            <FormControl
+              componentClass={CountryDropdown}
+              value={this.state.country}
+              onChange={this.handleCountryChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="destinationRegion">
+            <ControlLabel> Destination Region </ControlLabel>
+            <br/>
+            <FormControl
+              componentClass={RegionDropdown}
+              country={this.state.country}
+              value={this.state.region}
+              onChange={this.handleRegionChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="tripActivity" bsSize="large">
+            <ControlLabel> Activity </ControlLabel>
+            <FormControl componentClass="select" placeholder="select">
+              {this.props.tripTypes.map( (type, i) => <option value={type} key={i}> {type} </option> )}
+            </FormControl>
+          </FormGroup>
+
+          <Button type="submit">Submit</Button>
+        </Form>
+      </div>
+    );
+  }
 }
 
 export default NewTripForm

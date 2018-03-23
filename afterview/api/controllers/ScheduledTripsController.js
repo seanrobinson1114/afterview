@@ -63,11 +63,11 @@ module.exports = {
     ScheduledTrip.find().distinct( 'name', ( error, names ) => {
       if( error )
         response.send( error )
-        
+
         response.json( names );
     });
   },
-  
+
   // Insert new Scheduled Trip
   addTrip: ( request, response ) => {
     let new_trip = {name: request.body.name,
@@ -81,6 +81,7 @@ module.exports = {
       if( error )
         response.send( error );
 
+      else
         response.send( 'success' );
     });
   }

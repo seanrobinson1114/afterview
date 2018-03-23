@@ -25,7 +25,8 @@ class ScheduledTrips extends Component {
     let self = this;
     this.cache_manager.loadStaticValues().then( () => {
       self.setState({
-        'trip_names': self.cache_manager.getStaticValue( "TRIP_NAMES" )
+        trip_names: self.cache_manager.getStaticValue( "TRIP_NAMES" ),
+        trip_types: self.cache_manager.getStaticValue( "TRIP_TYPES" )
       });
     });
   }
@@ -46,8 +47,10 @@ class ScheduledTrips extends Component {
         { this.state && this.state.trip_names &&
           this.state.trip_names.map((trip, i) => <ScheduledTrip key={i} name={trip}/>)
         }
-        </div> 
-        <NewTripForm onSaveSuccess={this.updateState}/>
+        </div>
+        { this.state && this.state.trip_types &&
+          <NewTripForm onSaveSuccess={this.updateState} tripTypes={this.state.trip_types}/>
+        }
       </div>
     );
   }

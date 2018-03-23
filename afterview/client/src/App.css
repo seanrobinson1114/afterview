@@ -188,3 +188,47 @@ header {
   height: 50px !important;
   font-size: 1rem !important;
 }
+
+.react-datepicker {
+  font-size: 1.4rem !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.6rem !important;
+}
+
+.react-datepicker__header {
+  padding-top: 6px !important;
+}
+
+.react-datepicker__navigation {
+  top: 13px !important;
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+  margin: 1.6rem !important;
+}
+
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  border: 0.5rem solid grey;
+  border-radius: 10px;
+  background-color: rgb(210, 216, 224);
+  font-size: 18px;
+}
+
+/* .form label {
+  font-size: 24px;
+} */
+
+.form input {
+  border: 0.1rem solid rgb(68, 104, 163);
+  width: 20rem;
+  margin: 0 auto;
+}

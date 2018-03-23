@@ -8,11 +8,12 @@ import GETRequestHandler from './GETRequestHandler';
 
 // Frozen objects of fixed cache keys and urls
 let static_data_enums = {
-  TRIP_NAMES: {key: 'scheduled_trip_names', url: 'http://localhost:8080/schdtrips/getAllTripNames'}
+  TRIP_NAMES: {key: 'scheduled_trip_names', url: 'http://localhost:8080/schdtrips/getAllTripNames'},
+  TRIP_TYPES: {key: 'trip_types', url: 'http://localhost:8080/trips/getUniqueTypes/'}
 };
 Object.freeze( static_data_enums );
 
-/* 
+/*
  * Private class function
  * Make remote requests to retrieve data from static sections of api.
  */
@@ -58,10 +59,10 @@ class ScheduledTripsCacheManager {
   }
 
   /*
-   * Load all static data and store in the browser's localStorage. 
-   * If data corresponding to an enum already exists in the browser's 
+   * Load all static data and store in the browser's localStorage.
+   * If data corresponding to an enum already exists in the browser's
    * localStorage the load request will be ignored for that enum.
-   * 
+   *
    */
   loadStaticValues() {
     if( this.storage_available ) {
@@ -102,7 +103,7 @@ class ScheduledTripsCacheManager {
     if( this.storage_available ) {
       let storage_key =
           createTripNameStorageKey( this.trip_details_key_root, trip_name );
-    
+
       if( !localStorage.getItem( storage_key ) ) {
         return makeRequestAndGetTripData( trip_name ).then( ( response ) => {
           localStorage.setItem( storage_key, JSON.stringify( response ) );
@@ -118,7 +119,7 @@ class ScheduledTripsCacheManager {
     if( this.storage_available ) {
       let storage_key =
           createTripNameStorageKey( this.trip_details_key_root, trip_name );
-      
+
       return makeRequestAndGetTripData( trip_name ).then( ( response ) => {
         localStorage.setItem( storage_key, JSON.stringify( response ) );
       });
