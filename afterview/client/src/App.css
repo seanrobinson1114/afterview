@@ -186,7 +186,12 @@ header {
 
 .progress {
   height: 50px !important;
-  font-size: 1rem !important;
+  text-align: center;
+}
+
+.progress-bar {
+  font-size: 32px !important;
+  line-height: 40px !important;
 }
 
 .react-datepicker {
@@ -215,7 +220,8 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 75%;
+  width: 25%;
+  min-width: 300px;
   margin: 0 auto;
   border: 0.5rem solid grey;
   border-radius: 10px;
@@ -227,8 +233,28 @@ header {
   font-size: 24px;
 } */
 
+.form label {
+  margin: 0 auto;
+  margin-top: 6px;
+}
+
 .form input {
   border: 0.1rem solid rgb(68, 104, 163);
   width: 20rem;
+  height: 4rem !important;
   margin: 0 auto;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.buttons {
+  width: 50% !important;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: rgb(210, 216, 224);
+}
+
+.buttons button {
+  margin-bottom: 5px;
 }

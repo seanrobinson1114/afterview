@@ -19,7 +19,8 @@ class NewTripForm extends Component {
     this.state = {
       name: '',
       country: 'United States',
-      region: '',
+      region: 'Wisconsin',
+      type: 'Mountaineering'
     };
 
     // Bind functions to scope
@@ -231,7 +232,7 @@ class NewTripForm extends Component {
 
           <FormGroup controlId="tripActivity" bsSize="large">
             <ControlLabel> Activity </ControlLabel>
-            <FormControl componentClass="select" placeholder="select">
+            <FormControl componentClass="select" placeholder="select" onChange={this.handleActivityChange}>
               {this.props.tripTypes.map( (type, i) => <option value={type} key={i}> {type} </option> )}
             </FormControl>
           </FormGroup>

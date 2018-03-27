@@ -45,12 +45,12 @@ class ImageGallery extends Component {
   render() {
     return (
       <div>
+        <div> {this.props.tripName} </div>
         { !this.state.images_ready &&
-          <ProgressBar bsStyle="success" now={this.state.percent_complete} label={this.state.percent_complete +"%"}/>
+          <ProgressBar bsStyle="info" now={100} label={this.state.percent_complete +"%"}/>
         }
         <div className={(this.state.images_ready? 'ready' : 'loading')}>
-          <div> {this.props.tripName} </div>
-            {this.props.imageNames.map((image_name, i) => <div key={i}> <img src={this.image_url+'/'+image_name} onLoad={this.imageLoaded} alt={image_name}/> </div>)}
+          {this.props.imageNames.map((image_name, i) => <div key={i}> <img src={this.image_url+'/'+image_name} onLoad={this.imageLoaded} alt={image_name}/> </div>)}
         </div>
       </div>
     );

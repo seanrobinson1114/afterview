@@ -6,6 +6,7 @@
 // Imports
 import React, { Component } from 'react';
 import CacheManager from './CacheManager';
+import { ButtonGroup, Button } from 'react-bootstrap';
 
 class TripList extends Component {
   constructor( props ) {
@@ -29,6 +30,7 @@ class TripList extends Component {
     let display_trips = [];
 
     for( let trip_name of this.props.trips ) {
+      console.log( this.props.filterObj[trip_name] );
       if( ( this.props.filterObj[trip_name].type === type || type === 'All' ) &&
           ( this.props.filterObj[trip_name].state === state || state === 'All' ) &&
           ( this.props.filterObj[trip_name].country === country || country === 'All' ) ) {
@@ -43,6 +45,7 @@ class TripList extends Component {
   // Invoked before mounted component receives new props
   componentWillReceiveProps( new_props ) {
     // Filter the trip list
+    console.log( new_props );
     this.filterTrips( new_props.typeFilter,
                       new_props.stateFilter,
                       new_props.countryFilter );
@@ -50,8 +53,10 @@ class TripList extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.filtered_trips.map((trip, i) => <button key={i} onClick={() => this.selectionHandler(trip)}> {trip} </button>)}
+      <div className="buttons">
+        <ButtonGroup vertical block>
+          {this.state.filtered_trips.map((trip, i) => <Button bsSize="large" key={i} onClick={() => this.selectionHandler(trip)}> {trip} </Button>)}
+        </ButtonGroup>
       </div>
     );
   }
